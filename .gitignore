@@ -1,3 +1,7 @@
+# general...
+[Bb]uild/
+
+# CMake...
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
