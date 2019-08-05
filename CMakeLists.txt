@@ -3,9 +3,9 @@
 # https://stackoverflow.com/questions/35550116/which-cmake-version-as-the-minimum  
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 
-# notably sets the PROJECT_NAME variable, C/CXX as default build-languages
+# notably sets the PROJECT_NAME variable, C/CXX as default build-languages, but i'll overwrite it to just target CXX
 # https://cmake.org/cmake/help/latest/command/project.html
-project(cpp-xplatform)
+project(cpp-xplatform LANGUAGES CXX)
 
 # adds an executable target <cpp-xplatform> to be built from the source files listed <main.cpp>
 # the source files can be removed from here and specified later using target_sources()
