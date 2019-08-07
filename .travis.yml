@@ -1,4 +1,7 @@
 language: cpp
+
+# https://docs.travis-ci.com/user/reference/osx/
+# each build in the matrix gets run on a fresh image of a VM
 matrix:
   include:
     - os: linux
@@ -7,6 +10,14 @@ matrix:
     - os: linux
       dist: bionic
       compiler: clang
+    # https://docs.travis-ci.com/user/reference/osx/
+    # macOS 10.13 and Xcode 9.4.1 by default
+    # run clang front-end over LLVM back-end
+    - os: osx
+      compiler: clang
+    # run gcc front-end over LLVM back-end (not GNU-gcc)
+    - os: osx
+      compiler: gcc
 before_script:
   - mkdir build
   - cd build
