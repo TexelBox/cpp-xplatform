@@ -1,4 +1,7 @@
 # cpp-xplatform
+
+[![Build Status](https://travis-ci.org/TexelBox/cpp-xplatform.svg?branch=master)](https://travis-ci.org/TexelBox/cpp-xplatform)
+
 C++ cross-platform sample project using CMake + Git Submodules.
 
 WORK-IN-PROGRESS
