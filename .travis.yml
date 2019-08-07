@@ -4,6 +4,8 @@ language: cpp
 # each build in the matrix gets run on a fresh image of a VM
 matrix:
   include:
+    # https://docs.travis-ci.com/user/reference/bionic/
+    # note: bionic (Ubuntu 18.04 LTS) comes with gcc 7.4.0 + clang/llvm 7
     - os: linux
       dist: bionic
       compiler: gcc
@@ -11,12 +13,14 @@ matrix:
       dist: bionic
       compiler: clang
     # https://docs.travis-ci.com/user/reference/osx/
-    # macOS 10.13 and Xcode 9.4.1 by default
+    # macOS 10.13 and Xcode 9.4.1 by default, but i'm going to overwrite with a newer osx_image (macOS 10.13 and Xcode 10.0)
     # run clang front-end over LLVM back-end
     - os: osx
+      osx_image: xcode10
       compiler: clang
     # run gcc front-end over LLVM back-end (not GNU-gcc)
     - os: osx
+      osx_image: xcode10
       compiler: gcc
 before_script:
   - mkdir build
