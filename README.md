@@ -1,6 +1,7 @@
 # cpp-xplatform
 
 [![Build Status](https://travis-ci.org/TexelBox/cpp-xplatform.svg?branch=master)](https://travis-ci.org/TexelBox/cpp-xplatform)
+[![Build status](https://ci.appveyor.com/api/projects/status/9q38si39i32fd8d9?svg=true)](https://ci.appveyor.com/project/TexelBox/cpp-xplatform)
 
 C++17 cross-platform sample project using CMake + Git Submodules.
 
