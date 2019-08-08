@@ -1,5 +1,5 @@
 # set the build version to simply be the incremental build number
-version: {build}
+version: '{build}'
 image:
   - Visual Studio 2017
 clone_folder: C:\projects\cpp-xplatform
