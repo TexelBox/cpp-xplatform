@@ -1,0 +1,15 @@
+# set the build version to simply be the incremental build number
+version: {build}
+image:
+  - Visual Studio 2017
+clone_folder: C:\projects\cpp-xplatform
+branches:
+  only:
+    - master
+# run a custom build through a script rather than MSBuild directly
+build_script:
+  - cd C:\projects\cpp-xplatform
+  - mkdir build
+  - cd build
+  - cmake --version
+  - cmake ..
