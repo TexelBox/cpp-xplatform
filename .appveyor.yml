@@ -10,4 +10,6 @@ branches:
 build_script:
   - cd C:\projects\cpp-xplatform
   - cmake --version
-  - dev-build-all.bat
+# note: I feed 'nul' into the batch file to cause it to exit once it hits the pause at its end, this is a fix to prevent appveyor from hanging for an hour, since no key could be pressed to terminate
+# https://stackoverflow.com/questions/11729562/disable-pause-in-windows-bat-script
+  - dev-build-all.bat < nul
