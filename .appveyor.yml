@@ -9,7 +9,5 @@ branches:
 # run a custom build through a script rather than MSBuild directly
 build_script:
   - cd C:\projects\cpp-xplatform
-  - mkdir build
-  - cd build
   - cmake --version
-  - cmake ..
+  - dev-build-all.bat
