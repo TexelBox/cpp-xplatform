@@ -22,9 +22,7 @@ matrix:
     - os: osx
       osx_image: xcode10
       compiler: gcc
-before_script:
-  - mkdir build
-  - cd build
-  - cmake ..
 script:
-  - make
+  - ls -l
+  - ./dev-build-all.sh
+  - ls -a

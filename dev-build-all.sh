@@ -5,6 +5,7 @@ echo "test script"
 mkdir build
 cd build
 cmake ..
+make
 
 # pause the script at the end, until user wants to close it (analog to DOS-pause)
 # https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
