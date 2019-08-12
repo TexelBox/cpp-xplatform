@@ -24,5 +24,6 @@ matrix:
       compiler: gcc
 script:
   - ls -l
-  - ./dev-build-all.sh
+  # note: I feed '0' into the shell script to cause it to exit once it hits the pause at its end, this is a fix to prevent travis from hanging for 10? minutes, since no key could be pressed to terminate
+  - ./dev-build-all.sh < 0
   - ls -a
