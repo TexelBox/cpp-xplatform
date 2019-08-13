@@ -18,3 +18,27 @@ WORK-IN-PROGRESS
 ###### [Refer here for a comprehensive overview of which C++ standard features are supported by each compiler.](https://en.cppreference.com/w/cpp/compiler_support)
 - note: all C++17 core language features are supported by these compilers, but some library features are unsupported. 
 ---
+
+### Building (currently for developers only)
+- note: the enforced generators by the scripts are "Visual Studio 2017"/"Visual Studio 2017 Win64" and "Unix Makefiles" for their respective platforms. I won't be testing this repository with any other generator (use ```cmake --help``` for a list), but anybody can try using cmake manually to see if another generator works.  
+#### Windows:
+- double-click or use your favourite terminal to run
+```
+dev-build-all.bat
+```
+#### Linux/Mac:
+- use your favourite terminal to run
+```
+./dev-build-all.sh
+```
+- note: if for some reason the script is non-executable, then run the script through an interpreter (only bash is tested, but you can try another)
+```
+bash dev-build-all.sh
+```
+or add executable permissions and then run
+```
+chmod +x dev-build-all.sh
+./dev-build-all.sh
+```
+
+---
