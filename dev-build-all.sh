@@ -4,7 +4,7 @@
 echo "test script"
 mkdir build
 cd build
-cmake ..
+cmake -G "Unix Makefiles" ..
 make
 
 # pause the script at the end, until user wants to close it (analog to DOS-pause)
