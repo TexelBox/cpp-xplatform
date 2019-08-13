@@ -31,3 +31,7 @@ script:
   - cd build
   # print out all directory contents
   - ls -a
+  # print out these 2 files (useful info)
+  - cat Makefile
+  - echo "----------"
+  - cat CMakeCache.txt
