@@ -31,6 +31,8 @@ script:
   - cd build
   # print out all directory contents
   - ls -a
+  # print out file info for the executable (I want to see if x86 or x64)
+  - file cpp-xplatform
   # print out these 2 files (useful info)
   - cat Makefile
   - echo "----------"
