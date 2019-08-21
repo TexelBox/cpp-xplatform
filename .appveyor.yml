@@ -15,8 +15,8 @@ build_script:
   - dev-build-all.bat < nul
   # print out most of the generated files (note: hidden folders such as .vs/ will not be printed)
   - cd x86
-  # tree graphically/recursively displays the folder structure. /F is used to display the names of the files in each folder.
-  - tree /F
+  # tree graphically/recursively displays the folder structure. /F is used to display the names of the files in each folder. /A causes it to use ASCII characters (instead of extended characters that appveyor can't render)
+  - tree /F /A
   - echo ======================================================
   - echo ======================================================
   # type <filename> prints out the file contents (similar to UNIX cat)
@@ -24,7 +24,7 @@ build_script:
   - echo ======================================================
   - echo ======================================================
   - cd ../x64
-  - tree /F
+  - tree /F /A
   - echo ======================================================
   - echo ======================================================
   - type CMakeCache.txt
