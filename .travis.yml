@@ -23,6 +23,7 @@ matrix:
       osx_image: xcode10
       compiler: gcc
 script:
+  - cmake --version
   # print out file permissions to make sure shell script is executable (x-flag)
   - ls -l
   # note: I feed LICENSE file into the shell script to cause it to exit once it hits the pause at its end (reads first char in file), this is a fix to prevent travis from hanging for 10? minutes, since no key could be pressed to terminate
