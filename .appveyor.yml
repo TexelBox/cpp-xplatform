@@ -10,6 +10,21 @@ branches:
 build_script:
   - cd C:\projects\cpp-xplatform
   - cmake --version
-# note: I feed 'nul' into the batch file to cause it to exit once it hits the pause at its end, this is a fix to prevent appveyor from hanging for an hour, since no key could be pressed to terminate
-# https://stackoverflow.com/questions/11729562/disable-pause-in-windows-bat-script
+  # note: I feed 'nul' into the batch file to cause it to exit once it hits the pause at its end, this is a fix to prevent appveyor from hanging for an hour, since no key could be pressed to terminate
+  # https://stackoverflow.com/questions/11729562/disable-pause-in-windows-bat-script
   - dev-build-all.bat < nul
+  # print out most of the generated files (note: hidden folders such as .vs/ will not be printed)
+  - cd x86
+  # tree graphically/recursively displays the folder structure. /F is used to display the names of the files in each folder.
+  - tree /F
+  - echo ======================================================
+  - echo ======================================================
+  # type <filename> prints out the file contents (similar to UNIX cat)
+  - type CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
+  - cd ../x64
+  - tree /F
+  - echo ======================================================
+  - echo ======================================================
+  - type CMakeCache.txt
