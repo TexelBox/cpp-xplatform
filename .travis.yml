@@ -24,7 +24,9 @@ matrix:
       compiler: gcc
 # https://stackoverflow.com/questions/34377017/what-are-the-differences-between-the-before-install-script-travis-yml-opti
 install:
-  - if [ $TRAVIS_OS_NAME == linux ]; then apt install tree; fi
+  # https://docs.travis-ci.com/user/reference/overview/
+  # note: access to sudo command should be enabled by default (no need to place sudo: required at the top, I think...)
+  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt install tree; fi
   - if [ $TRAVIS_OS_NAME == osx ]; then brew install tree; fi
 script:
   - cmake --version
