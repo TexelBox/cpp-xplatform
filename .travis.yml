@@ -34,7 +34,12 @@ script:
   - cd build
   # recursively search the directory structure from the current working directory (.) and print to console
   # http://man7.org/linux/man-pages/man1/find.1.html
-  - find . -print
+  # the output of find is piped into sed (regex substitution) in order to make it look like an alias of tree command
+  # http://osxdaily.com/2016/09/09/view-folder-tree-terminal-mac-os-tree-equivalent/
+  # https://linux.die.net/man/1/sed
+  # http://www.grymoire.com/Unix/Sed.html#uh-1
+  # https://www.rexegg.com/regex-quickstart.html
+  - find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
   - echo ======================================================
   - echo ======================================================
   # DEBUG config...
