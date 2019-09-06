@@ -30,43 +30,40 @@ script:
   - ./dev-build-all.sh < LICENSE
   # note: any directory changing within a shell script is isolated since it runs in a subshell
   # https://stackoverflow.com/questions/255414/why-doesnt-cd-work-in-a-shell-script
+  # print out generated files
+  - cd build
+  # tree graphically/recursively displays the folder structure. -a is used to print all files (including hidden files)
+  # https://www.geeksforgeeks.org/tree-command-unixlinux/
+  - tree -a
+  - echo ======================================================
+  - echo ======================================================
   # DEBUG config...
-  - cd build/Debug
-  # print out all directory contents
-  - ls -a
   # print out file info for the executable (I want to see if x86 or x64)
-  - file cpp-xplatform
+  - file Debug/cpp-xplatform
   # print out these 2 files (useful info)
-  - cat Makefile
-  - cat CMakeCache.txt
-  - cd ../..
+  - cat Debug/Makefile
+  - cat Debug/CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
   # MINSIZEREL config...
-  - cd build/MinSizeRel
-  # print out all directory contents
-  - ls -a
   # print out file info for the executable (I want to see if x86 or x64)
-  - file cpp-xplatform
+  - file MinSizeRel/cpp-xplatform
   # print out these 2 files (useful info)
-  - cat Makefile
-  - cat CMakeCache.txt
-  - cd ../..
+  - cat MinSizeRel/Makefile
+  - cat MinSizeRel/CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
   # RELEASE config...
-  - cd build/Release
-  # print out all directory contents
-  - ls -a
   # print out file info for the executable (I want to see if x86 or x64)
-  - file cpp-xplatform
+  - file Release/cpp-xplatform
   # print out these 2 files (useful info)
-  - cat Makefile
-  - cat CMakeCache.txt
-  - cd ../..
+  - cat Release/Makefile
+  - cat Release/CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
   # RELWITHDEBINFO config...
-  - cd build/RelWithDebInfo
-  # print out all directory contents
-  - ls -a
   # print out file info for the executable (I want to see if x86 or x64)
-  - file cpp-xplatform
+  - file RelWithDebInfo/cpp-xplatform
   # print out these 2 files (useful info)
-  - cat Makefile
-  - cat CMakeCache.txt
-  - cd ../..
+  - cat RelWithDebInfo/Makefile
+  - cat RelWithDebInfo/CMakeCache.txt
