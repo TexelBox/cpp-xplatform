@@ -22,12 +22,6 @@ matrix:
     - os: osx
       osx_image: xcode10
       compiler: gcc
-# https://stackoverflow.com/questions/34377017/what-are-the-differences-between-the-before-install-script-travis-yml-opti
-install:
-  # https://docs.travis-ci.com/user/reference/overview/
-  # note: access to sudo command should be enabled by default (no need to place sudo: required at the top, I think...)
-  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt install tree; fi
-  - if [ $TRAVIS_OS_NAME == osx ]; then brew install tree; fi
 script:
   - cmake --version
   # print out file permissions to make sure shell script is executable (x-flag)
@@ -38,9 +32,9 @@ script:
   # https://stackoverflow.com/questions/255414/why-doesnt-cd-work-in-a-shell-script
   # print out generated files
   - cd build
-  # tree graphically/recursively displays the folder structure. -a is used to print all files (including hidden files)
-  # https://www.geeksforgeeks.org/tree-command-unixlinux/
-  - tree -a
+  # recursively search the directory structure from the current working directory (.) and print to console
+  # http://man7.org/linux/man-pages/man1/find.1.html
+  - find . -print
   - echo ======================================================
   - echo ======================================================
   # DEBUG config...
