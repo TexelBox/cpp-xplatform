@@ -15,6 +15,35 @@ set(CMAKE_CXX_STANDARD 17) # C++17 MSVC fix in CMake 3.10
 set(CMAKE_CXX_STANDARD_REQUIRED ON) # prevent default fallback to an older standard if compiler doesn't support C++17
 set(CMAKE_CXX_EXTENSIONS OFF) # only use the official standards (e.g. for g++, -std=c++17 and not -std=gnu++17)
 
+# https://docs.microsoft.com/en-us/cpp/build/reference/md-mt-ld-use-run-time-library?view=vs-2019
+# https://stackoverflow.com/questions/14172856/compile-with-mt-instead-of-md-using-cmake
+# https://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md
+# https://stackoverflow.com/questions/31037882/whats-the-cmake-syntax-to-set-and-use-variables
+# https://cmake.org/cmake/help/v3.0/command/set.html
+# for MSVC, switch to multi-threaded static linking of MSVCRT runtime library
+if(MSVC)
+     # init CompilerFlags variable as a list of these terms found in the cmake cache file
+     set(CompilerFlags
+          CMAKE_CXX_FLAGS
+          CMAKE_CXX_FLAGS_DEBUG
+          CMAKE_CXX_FLAGS_MINSIZEREL
+          CMAKE_CXX_FLAGS_RELEASE
+          CMAKE_CXX_FLAGS_RELWITHDEBINFO
+     )
+     # check each of these cache entries and replace any /MD with /MT and /MDd with /MTd
+     # note: since these variables are already in the cache, the pattern set(... CACHE ... FORCE) must be used to overwrite it
+     foreach(CompilerFlag ${CompilerFlags})
+          if(${CompilerFlag} MATCHES "/MD")
+               string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
+               set(${CompilerFlag} "${${CompilerFlag}}" CACHE STRING "msvc compiler flags" FORCE)
+          endif()
+          if(${CompilerFlag} MATCHES "/MDd")
+               string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
+               set(${CompilerFlag} "${${CompilerFlag}}" CACHE STRING "msvc compiler flags" FORCE)
+          endif()
+     endforeach()
+endif()
+
 # adds an executable target <cpp-xplatform> to be built from the source files listed <main.cpp>
 # the source files can be removed from here and specified later using target_sources()
 # https://cmake.org/cmake/help/latest/command/add_executable.html
