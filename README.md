@@ -1,12 +1,38 @@
 # cpp-xplatform
 
-[![Build Status](https://travis-ci.org/TexelBox/cpp-xplatform.svg?branch=master)](https://travis-ci.org/TexelBox/cpp-xplatform)
-[![Build status](https://ci.appveyor.com/api/projects/status/9q38si39i32fd8d9?svg=true)](https://ci.appveyor.com/project/TexelBox/cpp-xplatform)
-
 C++17 cross-platform sample project using CMake + Git Submodules.
 
 WORK-IN-PROGRESS
 - this repository is currently a learning experience for myself, but is intended to act as a small tutorial in the future.
+
+<a href="https://ci.appveyor.com/project/TexelBox/cpp-xplatform" target="_blank">AppVeyor CI project page</a>
+<br />
+<a href="https://travis-ci.org/TexelBox/cpp-xplatform" target="_blank">Travis CI project page</a>
+
+<table>
+    <tr>
+        <td>
+            master branch
+        </td>
+        <td>
+            Windows <a href="https://ci.appveyor.com/project/TexelBox/cpp-xplatform/branch/master" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/9q38si39i32fd8d9/branch/master?svg=true"></a>
+        </td>
+        <td>
+            Linux/macOS <a href="https://travis-ci.org/TexelBox/cpp-xplatform/branches" target="_blank"><img src="https://travis-ci.org/TexelBox/cpp-xplatform.svg?branch=master"></a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            dev branch
+        </td>
+        <td>
+            Windows <a href="https://ci.appveyor.com/project/TexelBox/cpp-xplatform/branch/dev" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/9q38si39i32fd8d9/branch/dev?svg=true"></a>
+        </td>
+        <td>
+            Linux/macOS <a href="https://travis-ci.org/TexelBox/cpp-xplatform/branches" target="_blank"><img src="https://travis-ci.org/TexelBox/cpp-xplatform.svg?branch=dev"></a>
+        </td>
+    </tr>
+</table>
 
 ---
 ### Supported compilers
