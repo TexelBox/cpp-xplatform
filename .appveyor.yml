@@ -3,9 +3,6 @@ version: '{build}'
 image:
   - Visual Studio 2017
 clone_folder: C:\projects\cpp-xplatform
-branches:
-  only:
-    - master
 # run a custom build through a script rather than MSBuild directly
 build_script:
   - cd C:\projects\cpp-xplatform
