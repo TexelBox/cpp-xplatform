@@ -15,6 +15,9 @@ set(CMAKE_CXX_STANDARD 17) # C++17 MSVC fix in CMake 3.10
 set(CMAKE_CXX_STANDARD_REQUIRED ON) # prevent default fallback to an older standard if compiler doesn't support C++17
 set(CMAKE_CXX_EXTENSIONS OFF) # only use the official standards (e.g. for g++, -std=c++17 and not -std=gnu++17)
 
+# add cmake/ directory to PATH variable where CMake looks for modules (.cmake files)
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 # https://docs.microsoft.com/en-us/cpp/build/reference/md-mt-ld-use-run-time-library?view=vs-2019
 # https://stackoverflow.com/questions/14172856/compile-with-mt-instead-of-md-using-cmake
 # https://stackoverflow.com/questions/20800166/cmake-compile-with-mt-instead-of-md
@@ -49,7 +52,22 @@ endif()
 # https://cmake.org/cmake/help/latest/command/add_executable.html
 # warning: use CMAKE_CURRENT_SOURCE_DIR rather than CMAKE_SOURCE_DIR since the the latter points to the src directory of the parent project. So, if my project is a sub-project of another then mine won't build
 # https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/issues/1428
-add_executable(cpp-xplatform ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
+add_executable(cpp-xplatform "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/string-utils.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
+
+# reference: https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/
+# SCOPE SPECIFIERS...
+# PRVATE - for internal building of target
+# INTERFACE - for external users (usage requirements) of target
+# PUBLIC = both PRIVATE and INTERFACE
+# thus the include/ directory is PUBLIC since it is needed for both internally building target and external users to possess
+# and src/ is PRIVATE since only private headers reside here and are only needed for internal building
+target_include_directories(cpp-xplatform
+     PUBLIC
+          $<INSTALL_INTERFACE:include>
+          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+     PRIVATE
+          ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
 
 # https://foonathan.net/blog/2018/10/17/cmake-warnings.html
 # set the warning flags for the respective compilers using cmake generator expressions
