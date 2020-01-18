@@ -25,26 +25,26 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 # https://cmake.org/cmake/help/v3.0/command/set.html
 # for MSVC, switch to multi-threaded static linking of MSVCRT runtime library
 if(MSVC)
-     # init CompilerFlags variable as a list of these terms found in the cmake cache file
-     set(CompilerFlags
-          CMAKE_CXX_FLAGS
-          CMAKE_CXX_FLAGS_DEBUG
-          CMAKE_CXX_FLAGS_MINSIZEREL
-          CMAKE_CXX_FLAGS_RELEASE
-          CMAKE_CXX_FLAGS_RELWITHDEBINFO
-     )
-     # check each of these cache entries and replace any /MD with /MT and /MDd with /MTd
-     # note: since these variables are already in the cache, the pattern set(... CACHE ... FORCE) must be used to overwrite it
-     foreach(CompilerFlag ${CompilerFlags})
-          if(${CompilerFlag} MATCHES "/MD")
-               string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
-               set(${CompilerFlag} "${${CompilerFlag}}" CACHE STRING "msvc compiler flags" FORCE)
-          endif()
-          if(${CompilerFlag} MATCHES "/MDd")
-               string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
-               set(${CompilerFlag} "${${CompilerFlag}}" CACHE STRING "msvc compiler flags" FORCE)
-          endif()
-     endforeach()
+    # init CompilerFlags variable as a list of these terms found in the cmake cache file
+    set(CompilerFlags
+        CMAKE_CXX_FLAGS
+        CMAKE_CXX_FLAGS_DEBUG
+        CMAKE_CXX_FLAGS_MINSIZEREL
+        CMAKE_CXX_FLAGS_RELEASE
+        CMAKE_CXX_FLAGS_RELWITHDEBINFO
+    )
+    # check each of these cache entries and replace any /MD with /MT and /MDd with /MTd
+    # note: since these variables are already in the cache, the pattern set(... CACHE ... FORCE) must be used to overwrite it
+    foreach(CompilerFlag ${CompilerFlags})
+        if(${CompilerFlag} MATCHES "/MD")
+            string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
+            set(${CompilerFlag} "${${CompilerFlag}}" CACHE STRING "msvc compiler flags" FORCE)
+        endif()
+        if(${CompilerFlag} MATCHES "/MDd")
+            string(REPLACE "/MDd" "/MTd" ${CompilerFlag} "${${CompilerFlag}}")
+            set(${CompilerFlag} "${${CompilerFlag}}" CACHE STRING "msvc compiler flags" FORCE)
+        endif()
+    endforeach()
 endif()
 
 # adds an executable target <cpp-xplatform> to be built from the source files listed <main.cpp>
@@ -62,11 +62,11 @@ add_executable(cpp-xplatform "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/string-utils
 # thus the include/ directory is PUBLIC since it is needed for both internally building target and external users to possess
 # and src/ is PRIVATE since only private headers reside here and are only needed for internal building
 target_include_directories(cpp-xplatform
-     PUBLIC
-          $<INSTALL_INTERFACE:include>
-          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-     PRIVATE
-          ${CMAKE_CURRENT_SOURCE_DIR}/src
+    PUBLIC
+        $<INSTALL_INTERFACE:include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
 # https://foonathan.net/blog/2018/10/17/cmake-warnings.html
@@ -77,16 +77,16 @@ target_include_directories(cpp-xplatform
 # note: if additional warning flags are to be added, I believe the project would have to be clean-rebuilt to apply the new warning detection to previously compiled files
 # note: for some reason, the cmakecache file doesn't reflect these changes (e.g. still says default of /W3), but they seem to still apply correctly
 target_compile_options(cpp-xplatform PRIVATE
-     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
-          -Wall -Wextra>
-          # opt. could add -Werror (if your libs don't throw so many warnings or you have good warning policy handling)
-     $<$<CXX_COMPILER_ID:MSVC>:
-          /W4>
-          # opt. could add /WX (if your libs don't throw so many warnings or you have good warning policy handling)
+    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
+        -Wall -Wextra>
+        # opt. could add -Werror (if your libs don't throw so many warnings or you have good warning policy handling)
+    $<$<CXX_COMPILER_ID:MSVC>:
+        /W4>
+        # opt. could add /WX (if your libs don't throw so many warnings or you have good warning policy handling)
 )
 
 # reference: https://stackoverflow.com/questions/7304625/how-do-i-change-the-startup-project-of-a-visual-studio-solution-via-cmake
 # sets the startup project in the Visual Studio solution (so that user doesn't have to explicitly right click target and set option)
 if(MSVC)
-     set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT cpp-xplatform)
+    set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT cpp-xplatform)
 endif()
