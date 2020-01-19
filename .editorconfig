@@ -1,0 +1,35 @@
+# reference: https://editorconfig.org/
+# reference: https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+
+# flag this as the top-most config file to use (don't keep searching up directory chain)
+root = true
+
+# default...
+[*]
+charset = utf-8
+end_of_line = unset
+indent_size = 4
+indent_style = space
+insert_final_newline = true
+tab_width = unset
+trim_trailing_whitespace = true
+
+[*.bat]
+end_of_line = crlf
+
+# markdown syntax allows trailing spaces for line breaks
+[*.md]
+trim_trailing_whitespace = false
+
+[*.sh]
+end_of_line = lf
+
+# NOTE: DO NOT PUT SPACES BETWEEN THE COMMA-SEPERATED ITEMS IN LIST (THIS CAUSED MY PARSER TO NOT WORK)
+[{*.yaml,*.yml,LICENSE}]
+indent_size = 2
+
+# makefiles require tabs syntactically
+[Makefile]
+end_of_line = lf
+indent_size = tab
+indent_style = tab
