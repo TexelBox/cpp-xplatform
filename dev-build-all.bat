@@ -1,5 +1,5 @@
 :: prevent printing-out the running commands to console
-:: note: the '@' causes this command to not print-out as well 
+:: note: the '@' causes this command to not print-out as well
 @echo off
 
 :: set console title
