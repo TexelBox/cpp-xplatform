@@ -7,14 +7,14 @@
 
 namespace prefix::utils {
     // reference: https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
-    
+
     // trim front (in-place)
     inline void ltrim(std::string &s) {
         s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
             return !std::isspace(ch);
         }));
     }
-    
+
     // trim end (in-place)
     inline void rtrim(std::string &s) {
         s.erase(std::find_if(s.rbegin(), s.rend(), [](int ch) {

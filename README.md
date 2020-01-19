@@ -42,11 +42,11 @@ WORK-IN-PROGRESS
 - MSVC (MSVC Standard Library) 19.14 (VS 2017 15.7)
 - Apple Clang 10.0.0
 ###### [Refer here for a comprehensive overview of which C++ standard features are supported by each compiler.](https://en.cppreference.com/w/cpp/compiler_support)
-- note: all C++17 core language features are supported by these compilers, but some library features are unsupported. 
+- note: all C++17 core language features are supported by these compilers, but some library features are unsupported.
 ---
 
 ### Building (currently for developers only)
-- note: the enforced generators by the scripts are "Visual Studio 2017"/"Visual Studio 2017 Win64" and "Unix Makefiles" for their respective platforms. I won't be testing this repository with any other generator (use ```cmake --help``` for a list), but anybody can try using cmake manually to see if another generator works.  
+- note: the enforced generators by the scripts are "Visual Studio 2017"/"Visual Studio 2017 Win64" and "Unix Makefiles" for their respective platforms. I won't be testing this repository with any other generator (use ```cmake --help``` for a list), but anybody can try using cmake manually to see if another generator works.
 #### Windows:
 - double-click or use your favourite terminal to run
 ```
