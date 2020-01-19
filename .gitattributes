@@ -3,10 +3,13 @@
 
 # reference: https://stackoverflow.com/questions/21302670/what-does-eol-in-gitattributes-do
 # from the above link, notably text/binary attributes affect how file appears in the REPO and the eol attribute affects how file appears in WORKING DIRECTORY (checked-out)
-# I believe !eol is the implicit setting which means checkout uses OS native line-endings (unless overriden by a user setting like core.autocrlf=true) 
+# I believe !eol is the implicit setting which means checkout uses OS native line-endings (unless overriden by a user setting like core.autocrlf=true)
 
 # default behaviour - have git auto-normalize line endings (set to LF) for files it thinks are text (unless overriden below by a specific pattern)
 * text=auto
+
+###### EditorConfig
+.editorconfig text
 
 ###### Git
 .gitattributes text
@@ -92,8 +95,8 @@ TODO text
 *.yaml text
 *.yml text
 browserslist text
-Makefile text
-makefile text
+Makefile text eol=lf
+makefile text eol=lf
 Procfile text
 .slugignore text
 # Linters
