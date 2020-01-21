@@ -22,7 +22,7 @@ matrix:
     - os: osx
       osx_image: xcode10
       compiler: gcc
-# reference: https://docs.travis-ci.com/user/common-build-problems/#git-cannot-clone-my-submodules
+# reference: https://docs.travis-ci.com/user/common-build-problems/#git-submodules-are-not-updated-correctly
 # reference: https://github.com/algolia/examples/issues/24
 # disable travis auto init/update of submodules (since it auto-detects a .gitmodules file)
 git:
