@@ -3,6 +3,10 @@ version: '{build}'
 image:
   - Visual Studio 2017
 clone_folder: C:\projects\cpp-xplatform
+# reference: https://github.com/appveyor/ci/issues/899
+install:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - git submodule update --init --recursive
 # run a custom build through a script rather than MSBuild directly
 build_script:
   - cd C:\projects\cpp-xplatform
