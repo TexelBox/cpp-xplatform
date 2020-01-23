@@ -1,0 +1,4 @@
+[submodule "deps/cotire"]
+	path = deps/cotire
+	url = https://github.com/sakra/cotire.git
+	branch = master
