@@ -1,9 +1,13 @@
 # cpp-xplatform
 
-C++17 cross-platform sample project using CMake + Git Submodules.
+C++17 cross-platform template repository using CMake + Git Submodules.
 
-WORK-IN-PROGRESS
-- this repository is currently a learning experience for myself, but is intended to act as a small tutorial in the future.
+# WORK-IN-PROGRESS
+- this repository is currently a learning experience for myself, but is intended to act as a small tutorial in the future. It will hopefully act as useful boilerplate that I can use for some personal projects. It can be extended into other templates as well.
+- the goal is to provide a well-documented template repository with typical features of an open source project (e.g. project structure/layout, submodule dependencies, build/utility scripts, testing, continous integration (CI), simple whitespace/eol handling, and more...).
+- TODO: provide a short concise explanation of the purpose of these features so that this repository doesn't look intimidating to unfamiliar eyes. This is very important since, from experience, many repos do a terrible job of explaining themselves :(.
+
+---
 
 <a href="https://ci.appveyor.com/project/TexelBox/cpp-xplatform" target="_blank">AppVeyor CI project page</a>
 <br />
@@ -35,6 +39,7 @@ WORK-IN-PROGRESS
 </table>
 
 ---
+
 ### Supported compilers
 #### Minimum versions:
 - GCC (libstdc++) 7
@@ -43,6 +48,21 @@ WORK-IN-PROGRESS
 - Apple Clang 10.0.0
 ###### [Refer here for a comprehensive overview of which C++ standard features are supported by each compiler.](https://en.cppreference.com/w/cpp/compiler_support)
 - note: all C++17 core language features are supported by these compilers, but some library features are unsupported.
+
+---
+
+### Cloning
+easiest (preferred) method:
+```
+git clone --recursive https://github.com/TexelBox/cpp-xplatform.git
+```
+or (if you did a normal clone already (first two lines below)...)
+```
+git clone https://github.com/TexelBox/cpp-xplatform.git
+cd cpp-xplatform/
+git submodule update --init --recursive
+```
+
 ---
 
 ### Building (currently for developers only)
@@ -66,5 +86,17 @@ or add executable permissions and then run
 chmod +x dev-build-all.sh
 ./dev-build-all.sh
 ```
+
+---
+
+### Dependencies
+Many thanks to the contributors of the following projects! Please check them out!
+- <a href="https://github.com/sakra/cotire" target="_blank">cotire - (CMake module to speed up builds.) - MIT licensed.</a>
+- <a href="https://github.com/onqtam/doctest" target="_blank">doctest - (The fastest feature-rich C++11/14/17/20 single-header testing framework for unit tests and TDD) - MIT licensed.</a>
+
+---
+
+now go make something cool!<br />
+:wink:
 
 ---
