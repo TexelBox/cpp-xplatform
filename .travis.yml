@@ -33,7 +33,7 @@ script:
   - cmake --version
   # print out file permissions to make sure shell script is executable (x-flag)
   - ls -l
-  # note: I feed the nul.txt file into the shell script to cause it to exit once it hits the pause at its end (reads first char in file), this is a fix to prevent travis from hanging for 10? minutes, since no key could be pressed to terminate
+  # note: I feed the travis-nul.txt file into the shell script to cause it to exit once it hits the pause at its end (reads first char in file), this is a fix to prevent travis from hanging for 10? minutes, since no key could be pressed to terminate
   - ./dev-build-all.sh < scripts/travis-nul.txt
   # note: any directory changing within a shell script is isolated since it runs in a subshell
   # https://stackoverflow.com/questions/255414/why-doesnt-cd-work-in-a-shell-script

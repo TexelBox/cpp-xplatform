@@ -2,6 +2,8 @@
 version: '{build}'
 image:
   - Visual Studio 2017
+build:
+  verbosity: minimal
 clone_folder: C:\projects\cpp-xplatform
 # reference: https://github.com/appveyor/ci/issues/899
 install:
