@@ -5,7 +5,7 @@
 //NOTE: downside is that you need to manually check if precompiled headers support is actually enabled on your compiler (if not, then you'll be compiling slower than normal due to some unused headers for a particular compilation unit)
 #include "pch.h"
 
-#include "utils/string-utils.hpp"
+#include <cpp-xplatform/utils/string-utils.hpp>
 
 int main() {
     std::cout << prefix::utils::trim_copy(" Hello World! ") << std::endl;
