@@ -93,6 +93,7 @@ target_include_directories(cpp-xplatform
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest/doctest
 )
 
 # https://foonathan.net/blog/2018/10/17/cmake-warnings.html
@@ -133,3 +134,13 @@ set_target_properties(cpp-xplatform PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${
 # must call this after setting all target properties of cpp-xplatform
 # apply cotire function on our target
 cotire(cpp-xplatform)
+
+if(NOT DEFINED PREFIX_BUILD_EXTERNAL_TESTS)
+    message(STATUS "(default) - setting PREFIX_BUILD_EXTERNAL_TESTS=OFF")
+    set(PREFIX_BUILD_EXTERNAL_TESTS OFF)
+endif()
+
+if(PREFIX_BUILD_EXTERNAL_TESTS)
+    message(STATUS "Building external tests...")
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests")
+endif()

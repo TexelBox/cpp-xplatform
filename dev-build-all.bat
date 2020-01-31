@@ -14,7 +14,9 @@ mkdir x86
 :: -H<source of CMakeLists.txt>
 :: -B<build directory>
 :: -G "<generator>"
-cmake -H. -Bx86 -G "Visual Studio 15 2017"
+:: -D<variable to set in cmake cache>
+:: I set the PREFIX_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
+cmake -H. -Bx86 -G "Visual Studio 15 2017" -DPREFIX_BUILD_EXTERNAL_TESTS=ON
 
 :: actually run MSBuild in the x86 build directory to generate all 4 configurations (4 executables)
 cmake --build x86 --config Debug
@@ -27,7 +29,7 @@ cmake --build x86 --config RelWithDebInfo
 :: BUILD x64...
 echo BUILDING FOR x64...
 mkdir x64
-cmake -H. -Bx64 -G "Visual Studio 15 2017 Win64"
+cmake -H. -Bx64 -G "Visual Studio 15 2017 Win64" -DPREFIX_BUILD_EXTERNAL_TESTS=ON
 cmake --build x64 --config Debug
 cmake --build x64 --config MinSizeRel
 cmake --build x64 --config Release
