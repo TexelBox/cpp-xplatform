@@ -96,6 +96,8 @@ target_include_directories(cpp-xplatform
         ${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest/doctest
 )
 
+target_compile_definitions(cpp-xplatform PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS)
+
 # https://foonathan.net/blog/2018/10/17/cmake-warnings.html
 # set the warning flags for the respective compilers using cmake generator expressions
 # (removed, since this causes build nightmares when using warning-heavy libs) using -Werror and /WX to treat warnings as compile errors (ensures warnings get either fixed or suppressed right away rather than getting hidden in files that never get compiled again)

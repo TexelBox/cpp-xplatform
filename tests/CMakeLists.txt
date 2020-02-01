@@ -8,3 +8,5 @@ message(STATUS "external testing source files = ${PREFIX_EXTERNAL_TESTING_SOURCE
 add_executable(cpp-xplatform-external-tests ${PREFIX_EXTERNAL_TESTING_SOURCE_FILES})
 
 target_include_directories(cpp-xplatform-external-tests PRIVATE "${PROJECT_SOURCE_DIR}/deps/doctest/doctest" "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src")
+
+target_compile_definitions(cpp-xplatform-external-tests PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS)
