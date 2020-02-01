@@ -71,14 +71,37 @@ if(MSVC)
     endforeach()
 endif()
 
-# adds an executable target <cpp-xplatform> to be built from the source files listed <main.cpp>
+# reference: https://stackoverflow.com/questions/35411489/add-all-files-under-a-folder-to-a-cmake-glob
+# reference: https://stackoverflow.com/questions/7533502/how-can-i-merge-multiple-lists-of-files-together-with-cmake
+# reference: https://stackoverflow.com/questions/15550777/how-do-i-exclude-a-single-file-from-a-cmake-fileglob-pattern
+# note: headers aren't explicitly needed to be specified here to the target since they will be found anyway, but it's convenient to include them since it allows IDEs to see them
+# reference: https://cmake.org/cmake/help/v3.0/command/file.html
+# reference: https://stackoverflow.com/questions/1027247/is-it-better-to-specify-source-files-with-glob-or-each-file-individually-in-cmak/18538444
+# VERY IMPORTANT note: globbing source files is not recommended by cmake since your build system won't be able to detect a change to this file's timestamp when a new source file is added
+# thus, your build system won't automatically regenerate to recognize the new file
+# this is especially problematic if you are working with other devs and pull down their changes (where they added new files), resulting in unintuitive build errors
+# the fix for this is to manually run "touch CMakeLists.txt" to update the timestamp yourself after you create new source files or after you pull down changes from other devs (if they added new files)
+# MY RATIONALE FOR DOING IT THIS WAY RATHER THAN MANUALLY LISTING ALL SOURCE FILES...
+# 1. it seems like the most "automatic" way of working, albeit not 100% automatic (only problem is to remember to run touch utility)
+# 2. the file name exists only in 1 place (on disk), so renaming/deleting a file won't have to also be done in this script
+# 3. way shorter cmake script, especially for many source file projects
+# 4. in both ways, you have to do something manually, and I feel a "touch" is easier than writing a bunch of filenames here in this script
+# 5. globbing could result in false positives, but these could be rare and can be fixed with REMOVE_ITEM or partial manual listing
+# note: apparently cmake 3.12 added a CONFIGURE_DEPENDS option that reruns cmake when glob value changes, but this seems like it could be problematic with different generators and could slow down the build pipeline a bit
+file(GLOB_RECURSE PREFIX_SOURCE_FILES_IN_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c++" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hh" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h++")
+list(REMOVE_ITEM PREFIX_SOURCE_FILES_IN_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.cpp")
+file(GLOB_RECURSE PREFIX_SOURCE_FILES_IN_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.c" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.cxx" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.c++" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.hh" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.h++")
+# note: according to cotire manual, the pch.cpp file must be the first listed source file for out target
+# reference: https://github.com/sakra/cotire/blob/master/MANUAL.md#using-a-manually-maintained-prefix-header-instead-of-the-automatically-generated-one
+# note: you will also have to add paths to any dependency sources only when they are required to be built directly with your files
+list(APPEND PREFIX_ALL_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.cpp" ${PREFIX_SOURCE_FILES_IN_SRC_DIR} ${PREFIX_SOURCE_FILES_IN_INCLUDE_DIR})
+message(STATUS "main target source files = ${PREFIX_ALL_SOURCE_FILES}")
+# adds an executable target called <cpp-xplatform> to be built from the source files listed
 # the source files can be removed from here and specified later using target_sources()
 # https://cmake.org/cmake/help/latest/command/add_executable.html
 # warning: use CMAKE_CURRENT_SOURCE_DIR rather than CMAKE_SOURCE_DIR since the the latter points to the src directory of the parent project. So, if my project is a sub-project of another then mine won't build
 # https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/issues/1428
-# note: according to cotire manual, the pch.cpp file must be the first listed source file for out target
-# reference: https://github.com/sakra/cotire/blob/master/MANUAL.md#using-a-manually-maintained-prefix-header-instead-of-the-automatically-generated-one
-add_executable(cpp-xplatform "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
+add_executable(cpp-xplatform ${PREFIX_ALL_SOURCE_FILES})
 
 # reference: https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/
 # SCOPE SPECIFIERS...

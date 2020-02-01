@@ -3,7 +3,7 @@ if(POLICY CMP0037)
     cmake_policy(SET CMP0037 OLD)
 endif()
 
-file(GLOB_RECURSE PREFIX_EXTERNAL_TESTING_SOURCE_FILES "${CMAKE_CURRENT_LIST_DIR}" "*.c" "*.cc" "*.cxx" "*.cpp" "*.c++" ".h" ".hh" ".hpp" ".h++")
+file(GLOB_RECURSE PREFIX_EXTERNAL_TESTING_SOURCE_FILES "${CMAKE_CURRENT_LIST_DIR}/*.c" "${CMAKE_CURRENT_LIST_DIR}/*.cc" "${CMAKE_CURRENT_LIST_DIR}/*.cxx" "${CMAKE_CURRENT_LIST_DIR}/*.cpp" "${CMAKE_CURRENT_LIST_DIR}/*.c++" "${CMAKE_CURRENT_LIST_DIR}/*.h" "${CMAKE_CURRENT_LIST_DIR}/*.hh" "${CMAKE_CURRENT_LIST_DIR}/*.hpp" "${CMAKE_CURRENT_LIST_DIR}/*.h++")
 message(STATUS "external testing source files = ${PREFIX_EXTERNAL_TESTING_SOURCE_FILES}")
 add_executable(cpp-xplatform-external-tests ${PREFIX_EXTERNAL_TESTING_SOURCE_FILES})
 
