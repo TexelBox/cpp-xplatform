@@ -96,6 +96,16 @@ target_include_directories(cpp-xplatform
         ${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest/doctest
 )
 
+# reference: https://github.com/onqtam/doctest/blob/master/doc/markdown/configuration.md#doctest_config_use_std_headers
+# globally defining DOCTEST_CONFIG_USE_STD_HEADERS is required to make our application compliant to c++ standards
+# it forces doctest to include the relevant std headers (notably std::ostream) rather than using doctest's custom forward declarations
+# the downside is that compilation will be slower (hopefully minimized by pch usage though)
+# the main reason why i'm defining this though is that it seems to fix macOS build failures due to a weird bug, that I don't fully understand...
+# the following links contain some discussion about it...
+# note: it might be better to only define this on macOS/AppleClang, but i'm not sure the actual bug cause, so I define it universally to be consistent/safe
+# https://github.com/onqtam/doctest/issues/126
+# todo: the above link might suggest that other definitions are needed (to fix other linker errors) like DOCTEST_CONFIG_ASSERTION_PARAMETERS_BY_VALUE, but I will only add those if needed frequently or for good reason
+# https://github.com/onqtam/doctest/issues/183
 target_compile_definitions(cpp-xplatform PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS)
 
 # https://foonathan.net/blog/2018/10/17/cmake-warnings.html
