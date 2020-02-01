@@ -3,7 +3,8 @@ if(POLICY CMP0037)
     cmake_policy(SET CMP0037 OLD)
 endif()
 
-add_executable(utils-string-utils-test "${CMAKE_CURRENT_LIST_DIR}/utils/string-utils.test.cpp")
+file(GLOB_RECURSE PREFIX_EXTERNAL_TESTING_SOURCE_FILES "${CMAKE_CURRENT_LIST_DIR}" "*.c" "*.cc" "*.cxx" "*.cpp" "*.c++" ".h" ".hh" ".hpp" ".h++")
+message(STATUS "external testing source files = ${PREFIX_EXTERNAL_TESTING_SOURCE_FILES}")
+add_executable(cpp-xplatform-external-tests ${PREFIX_EXTERNAL_TESTING_SOURCE_FILES})
 
-list(APPEND COMMON_TARGET_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/deps/doctest/doctest" "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src")
-target_include_directories(utils-string-utils-test PRIVATE ${COMMON_TARGET_INCLUDE_DIRS})
+target_include_directories(cpp-xplatform-external-tests PRIVATE "${PROJECT_SOURCE_DIR}/deps/doctest/doctest" "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src")
