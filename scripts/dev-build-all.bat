@@ -12,6 +12,23 @@ setlocal
 :: set console title
 title DEV-BUILD-ALL
 
+:: reference: https://stackoverflow.com/questions/35544871/batchfile-whats-the-best-way-to-declare-and-use-a-boolean-variable
+set "no_pause="
+:: reference: https://www.robvanderwoude.com/parameters.php
+:: note: for command-line options, it would be preferable to use the convention of / as the prefix
+:: but, this is problematic since git bash replaces leading / with git paths (for some reason)
+:: reference: https://superuser.com/questions/1142397/how-to-run-windows-command-prompt-utilities-options-in-git-bash-how-to-specify
+:: reference: https://github.com/bmatzelle/gow/issues/196
+:: above links show similar behaviour which can be overcome by using \/ or // to act as one /, but this then is inconsistent with Command Prompt and PowerShell
+:: thus, we might as well just use *nix convention of - or -- as the prefix (with added benefit that shell scripts can use the same flags)
+:: might as well make options be case-sensitive as well
+:: reference: https://stackoverflow.com/questions/28689850/what-does-a-mean-batch
+:: reference: https://stackoverflow.com/questions/16144716/what-does-mean-in-a-batch-file
+echo args passed in: %*
+for %%a in (%*) do (
+    if "%%a" == "--no-pause" (set "no_pause=y")
+)
+
 :: execute rest of script from project root directory as it used to
 cd ..
 
@@ -46,7 +63,10 @@ cmake --build x64 --config Release
 cmake --build x64 --config RelWithDebInfo
 :: END of building for x64
 
+:: jump over pause if option set (useful for CI to not get hung)
+if defined no_pause (goto after_pause)
 :: stop execution of batch file, until user hits a key
 pause
+:after_pause
 
 endlocal
