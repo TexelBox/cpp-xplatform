@@ -2,6 +2,13 @@
 :: note: the '@' causes this command to not print-out as well
 @echo off
 
+:: reference: https://superuser.com/questions/316431/temporarily-change-directory-for-single-batch-file-command
+:: default batch file behaviour (at least when run by Command Prompt) is to be run/interpreted in parent shell context
+:: setlocal/endlocal blocks wrap commands to be run in a local "subshell" context similar to default behaviour of *nix shell scripts
+:: this is important for not changing the directory outside of this script context (mostly so AppVeyor doesn't break or have to be written in a more coupled manner)
+:: note: setlocal/endlocal doesn't seem to be needed when double-clicking, running w/ PowerShell, running w/ Git Bash (and probably other *nix shells)
+setlocal
+
 :: set console title
 title DEV-BUILD-ALL
 
@@ -41,3 +48,5 @@ cmake --build x64 --config RelWithDebInfo
 
 :: stop execution of batch file, until user hits a key
 pause
+
+endlocal
