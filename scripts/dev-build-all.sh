@@ -2,6 +2,21 @@
 # using the above shebang to be most-portable
 # https://stackoverflow.com/questions/10376206/what-is-the-preferred-bash-shebang
 
+no_pause="false"
+
+# reference: https://stackoverflow.com/questions/9994295/what-does-mean-in-a-shell-script
+# reference: https://unix.stackexchange.com/questions/258341/echo-a-string-with-a-variable-in-it-without-expanding-evaluating-it
+# reference: https://stackoverflow.com/questions/255898/how-to-iterate-over-arguments-in-a-bash-script
+# reference: https://stackoverflow.com/questions/9727695/bash-scripting-if-arguments-is-equal-to-this-string-define-a-variable-like-thi
+# reference: https://stackoverflow.com/questions/2953646/how-can-i-declare-and-use-boolean-variables-in-a-shell-script
+echo "args passed in: $@"
+for arg in "$@"
+do
+    if [ $arg = "--no-pause" ] ; then
+        no_pause="true"
+    fi
+done
+
 # notes:
 # mkdir -p creates a nested directory structure
 # https://linux.die.net/man/1/mkdir
@@ -27,6 +42,8 @@ mkdir -p build/Release && cd build/Release && cmake -G "Unix Makefiles" -DCMAKE_
 echo "BUILDING RELWITHDEBINFO CONFIG..."
 mkdir -p build/RelWithDebInfo && cd build/RelWithDebInfo && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../.. && make && cd ../..
 
-# pause the script at the end, until user wants to close it (analog to DOS-pause)
+# pause the script at the end (unless --no-pause option is set), until user wants to close it (analog to DOS-pause)
 # https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
-read -n1 -r -p "Press any key to continue . . . " key
+if [ $no_pause = "false" ] ; then
+    read -n1 -r -p "Press any key to continue . . . " key
+fi
