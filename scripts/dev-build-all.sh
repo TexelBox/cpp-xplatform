@@ -12,6 +12,9 @@
 # I also set the PREFIX_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
 # https://cmake.org/cmake/help/v3.2/manual/cmake.1.html
 
+# execute rest of script from project root directory like it use to
+cd ..
+
 echo "BUILDING DEBUG CONFIG..."
 mkdir -p build/Debug && cd build/Debug && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../.. && make && cd ../..
 

@@ -5,6 +5,9 @@
 :: set console title
 title DEV-BUILD-ALL
 
+:: execute rest of script from project root directory as it used to
+cd ..
+
 :: BUILD x86...
 echo BUILDING FOR x86...
 :: note: if x86 directory already exists then it will just echo an error and the batch file will continue executing
