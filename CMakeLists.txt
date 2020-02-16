@@ -110,13 +110,15 @@ add_executable(cpp-xplatform ${PREFIX_ALL_SOURCE_FILES})
 # PUBLIC = both PRIVATE and INTERFACE
 # thus the include/ directory is PUBLIC since it is needed for both internally building target and external users to possess
 # and src/ is PRIVATE since only private headers reside here and are only needed for internal building
+# note: it seems like include paths must be absolute, except for INSTALL_INTERFACE which allows relative paths (also BUILD_INTERFACE paths can't be quoted without error (for a reason unknown to me))
+# reference: https://cmake.org/cmake/help/v3.2/prop_tgt/INTERFACE_INCLUDE_DIRECTORIES.html
 target_include_directories(cpp-xplatform
     PUBLIC
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest
+        "${CMAKE_CURRENT_SOURCE_DIR}/src"
+        "${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest"
 )
 
 # reference: https://github.com/onqtam/doctest/blob/master/doc/markdown/configuration.md#doctest_config_use_std_headers
