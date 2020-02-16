@@ -73,6 +73,7 @@ git submodule update --init --recursive
 ```
 dev-build-all.bat
 ```
+- note: you may have to run `./dev-build-all.bat` or `.\dev-build-all.bat` instead (depending on your shell).
 #### Linux/Mac:
 - use your favourite terminal to run
 ```
