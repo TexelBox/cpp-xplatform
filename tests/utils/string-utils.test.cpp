@@ -1,4 +1,4 @@
-#include <doctest.h>
+#include <doctest/doctest.h>
 
 #include <cpp-xplatform/utils/string-utils.hpp>
 

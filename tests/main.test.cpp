@@ -6,7 +6,7 @@
 //      DOCTEST_MSVC_SUPPRESS_WARNING_POP
 //      #endif // DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include <doctest.h>
+#include <doctest/doctest.h>
 
 namespace prefix {
 

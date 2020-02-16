@@ -116,7 +116,7 @@ target_include_directories(cpp-xplatform
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
-        ${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest/doctest
+        ${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest
 )
 
 # reference: https://github.com/onqtam/doctest/blob/master/doc/markdown/configuration.md#doctest_config_use_std_headers

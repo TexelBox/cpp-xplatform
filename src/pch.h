@@ -6,6 +6,6 @@
 #include <string>
 #include <vector>
 
-#include <doctest.h>
+#include <doctest/doctest.h>
 
 #endif // PREFIX_PCH_H_

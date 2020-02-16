@@ -10,7 +10,7 @@
 #define DOCTEST_CONFIG_NO_UNPREFIXED_OPTIONS
 // implement doctest, but we must specify our own main()
 #define DOCTEST_CONFIG_IMPLEMENT
-#include <doctest.h>
+#include <doctest/doctest.h>
 
 #include <cpp-xplatform/utils/string-utils.hpp>
 
