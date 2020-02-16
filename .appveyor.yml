@@ -39,3 +39,8 @@ build_script:
   - echo ======================================================
   - type cpp-xplatform.vcxproj
   - type CMakeCache.txt
+# run custom tests...
+test_script:
+  - cd C:\projects\cpp-xplatform\scripts
+  - run-internal-tests.bat --no-pause
+  - run-external-tests.bat --no-pause
