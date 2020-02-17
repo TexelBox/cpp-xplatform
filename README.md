@@ -91,6 +91,28 @@ chmod +x dev-build-all.sh
 
 ---
 
+### Running
+#### For users...
+##### Windows:
+- for best performance, double-click/run `cpp-xplatform.exe` in either x86/Release (32-bit) or x64/Release (64-bit).
+##### Linux/Mac:
+- for best performance, double-click/run `cpp-xplatform` in build/Release.
+
+#### For developers...
+##### Windows:
+- if using `VS2017`, open either x86/cpp-xplatform.sln or x64/cpp-xplatform.sln and click the green arrow (you can also change the build config with the drop-down - use Debug when you need the debugger and Release when testing for performance).
+##### Linux:
+```
+make
+./cpp-xplatform
+```
+##### Different cmd-line options:
+- only run program: `./cpp-xplatform`
+- run program and internal tests: `./cpp-xplatform --dt-no-run=false`
+- only run tests: `./cpp-xplatform --dt-exit=true --dt-no-run=false`
+
+---
+
 ### Dependencies
 Many thanks to the contributors of the following projects! Please check them out!
 - <a href="https://github.com/sakra/cotire" target="_blank">cotire - (CMake module to speed up builds.) - MIT licensed.</a>
