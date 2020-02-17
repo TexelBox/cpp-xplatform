@@ -1,4 +1,8 @@
 [submodule "deps/cotire"]
-	path = deps/cotire
-	url = https://github.com/sakra/cotire.git
-	branch = master
+    path = deps/cotire
+    url = https://github.com/sakra/cotire.git
+    branch = master
+[submodule "deps/doctest"]
+    path = deps/doctest
+    url = https://github.com/onqtam/doctest.git
+    branch = master

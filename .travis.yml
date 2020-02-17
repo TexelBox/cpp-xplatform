@@ -31,14 +31,15 @@ before_install:
   - git submodule update --init --recursive
 script:
   - cmake --version
-  # print out file permissions to make sure shell script is executable (x-flag)
+  - cd scripts
+  # print out file permissions to make sure shell scripts are executable (x-flag)
   - ls -l
-  # note: I feed the travis-nul.txt file into the shell script to cause it to exit once it hits the pause at its end (reads first char in file), this is a fix to prevent travis from hanging for 10? minutes, since no key could be pressed to terminate
-  - ./dev-build-all.sh < scripts/travis-nul.txt
+  # note: I run the shell script with --no-pause option to cause it to exit without pausing at the end, this is a fix to prevent travis from hanging for 10? minutes, since no key could be pressed to terminate
+  - ./dev-build-all.sh --no-pause
   # note: any directory changing within a shell script is isolated since it runs in a subshell
   # https://stackoverflow.com/questions/255414/why-doesnt-cd-work-in-a-shell-script
   # print out generated files
-  - cd build
+  - cd ../build
   # recursively search the directory structure from the current working directory (.) and print to console
   # http://man7.org/linux/man-pages/man1/find.1.html
   # the output of find is piped into sed (regex substitution) in order to make it look like an alias of tree command
@@ -79,3 +80,8 @@ script:
   # print out these 2 files (useful info)
   - cat RelWithDebInfo/Makefile
   - cat RelWithDebInfo/CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
+  - cd ../scripts
+  - ./run-internal-tests.sh --no-pause
+  - ./run-external-tests.sh --no-pause

@@ -66,18 +66,20 @@ git submodule update --init --recursive
 ---
 
 ### Building (currently for developers only)
-- note: the enforced generators by the scripts are "Visual Studio 2017"/"Visual Studio 2017 Win64" and "Unix Makefiles" for their respective platforms. I won't be testing this repository with any other generator (use ```cmake --help``` for a list), but anybody can try using cmake manually to see if another generator works.
+- note: the enforced generators by the scripts are "Visual Studio 2017"/"Visual Studio 2017 Win64" and "Unix Makefiles" for their respective platforms. I won't be testing this repository with any other generator (use `cmake --help` for a list), but anybody can try using cmake manually to see if another generator works.
+- note: `cd scripts` before running any scripts (i.e. must run scripts from scripts/ directory).
 #### Windows:
 - double-click or use your favourite terminal to run
 ```
 dev-build-all.bat
 ```
+- note: you may have to run `./dev-build-all.bat` or `.\dev-build-all.bat` instead (depending on your shell).
 #### Linux/Mac:
 - use your favourite terminal to run
 ```
 ./dev-build-all.sh
 ```
-- note: if for some reason the script is non-executable, then run the script through an interpreter (only bash is tested, but you can try another)
+- note: if for some reason the script is non-executable, then run the script through an interpreter (only `bash` is tested, but you can try another like `sh`).
 ```
 bash dev-build-all.sh
 ```
@@ -86,6 +88,28 @@ or add executable permissions and then run
 chmod +x dev-build-all.sh
 ./dev-build-all.sh
 ```
+
+---
+
+### Running
+#### For users...
+##### Windows:
+- for best performance, double-click/run `cpp-xplatform.exe` in either x86/Release (32-bit) or x64/Release (64-bit).
+##### Linux/Mac:
+- for best performance, double-click/run `cpp-xplatform` in build/Release.
+
+#### For developers...
+##### Windows:
+- if using `VS2017`, open either x86/cpp-xplatform.sln or x64/cpp-xplatform.sln and click the green arrow (you can also change the build config with the drop-down - use Debug when you need the debugger and Release when testing for performance).
+##### Linux:
+```
+make
+./cpp-xplatform
+```
+##### Different cmd-line options:
+- only run program: `./cpp-xplatform`
+- run program and internal tests: `./cpp-xplatform --dt-no-run=false`
+- only run tests: `./cpp-xplatform --dt-exit=true --dt-no-run=false`
 
 ---
 

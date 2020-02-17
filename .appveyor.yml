@@ -13,11 +13,17 @@ install:
 build_script:
   - cd C:\projects\cpp-xplatform
   - cmake --version
-  # note: I feed 'nul' into the batch file to cause it to exit once it hits the pause at its end, this is a fix to prevent appveyor from hanging for an hour, since no key could be pressed to terminate
+  - cd scripts
+  # note: I used to feed 'nul' into the batch file (dev-build-all.bat < nul) to cause it to exit once it hits the pause at its end to prevent appveyor from hanging for an hour, since no key could be pressed to terminate (as linked below), but this only works if run in Command Prompt
   # https://stackoverflow.com/questions/11729562/disable-pause-in-windows-bat-script
-  - dev-build-all.bat < nul
+  # more flexible solution...
+  # note: there is still the problem that different shells support different ways of running the script, but no 1 universal way that I know of
+  # e.g. dev-build-all.bat (supported by Command Prompt)
+  # e.g. ./dev-build-all.bat (supported by PowerShell and Git Bash)
+  # e.g. .\dev-build-all.bat (supported by Command Prompt and PowerShell)
+  - dev-build-all.bat --no-pause
   # print out most of the generated files (note: hidden folders such as .vs/ will not be printed)
-  - cd x86
+  - cd ../x86
   # tree graphically/recursively displays the folder structure. /F is used to display the names of the files in each folder. /A causes it to use ASCII characters (instead of extended characters that appveyor can't render)
   - tree /F /A
   - echo ======================================================
@@ -33,3 +39,8 @@ build_script:
   - echo ======================================================
   - type cpp-xplatform.vcxproj
   - type CMakeCache.txt
+# run custom tests...
+test_script:
+  - cd C:\projects\cpp-xplatform\scripts
+  - run-internal-tests.bat --no-pause
+  - run-external-tests.bat --no-pause
