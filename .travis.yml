@@ -80,3 +80,8 @@ script:
   # print out these 2 files (useful info)
   - cat RelWithDebInfo/Makefile
   - cat RelWithDebInfo/CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
+  - cd ../scripts
+  - ./run-internal-tests.sh --no-pause
+  - ./run-external-tests.sh --no-pause
