@@ -10,38 +10,53 @@ for %%a in (%*) do (
     if "%%a" == "--no-pause" (set "no_pause=y")
 )
 
-cd ..
+cd .. || goto error
 
 :: RUN x86...
 echo RUNNING x86+Debug internal tests...
-x86\Debug\cpp-xplatform.exe --dt-exit=true --dt-no-run=false
+x86\Debug\cpp-xplatform.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING x86+MinSizeRel internal tests...
-x86\MinSizeRel\cpp-xplatform.exe --dt-exit=true --dt-no-run=false
+x86\MinSizeRel\cpp-xplatform.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING x86+Release internal tests...
-x86\Release\cpp-xplatform.exe --dt-exit=true --dt-no-run=false
+x86\Release\cpp-xplatform.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING x86+RelWithDebInfo internal tests...
-x86\RelWithDebInfo\cpp-xplatform.exe --dt-exit=true --dt-no-run=false
+x86\RelWithDebInfo\cpp-xplatform.exe --dt-exit=true --dt-no-run=false || goto error
 :: END of running for x86
 
 :: RUN x64...
 echo RUNNING x64+Debug internal tests...
-x64\Debug\cpp-xplatform.exe --dt-exit=true --dt-no-run=false
+x64\Debug\cpp-xplatform.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING x64+MinSizeRel internal tests...
-x64\MinSizeRel\cpp-xplatform.exe --dt-exit=true --dt-no-run=false
+x64\MinSizeRel\cpp-xplatform.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING x64+Release internal tests...
-x64\Release\cpp-xplatform.exe --dt-exit=true --dt-no-run=false
+x64\Release\cpp-xplatform.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING x64+RelWithDebInfo internal tests...
-x64\RelWithDebInfo\cpp-xplatform.exe --dt-exit=true --dt-no-run=false
+x64\RelWithDebInfo\cpp-xplatform.exe --dt-exit=true --dt-no-run=false || goto error
 :: END of running for x64
 
-if defined no_pause (goto after_pause)
-pause
-:after_pause
+:success
+:: don't pause if option set (useful for CI to not get hung)
+:: stop execution of batch file, until user hits a key
+if not defined no_pause (pause)
+:: reference: https://ss64.com/nt/endlocal.html
+:: note: endlocal will happen implicitly when this script terminates
+:: clean-exit (ignore any residual ERRORLEVEL by overriding it with 0)
+exit /B 0
 
-endlocal
+:error
+echo ERROR
+:: don't pause if option set (useful for CI to not get hung)
+:: stop execution of batch file, until user hits a key
+if not defined no_pause (pause)
+:: reference: https://stackoverflow.com/questions/734598/how-do-i-make-a-batch-file-terminate-upon-encountering-an-error
+:: reference: https://ss64.com/nt/exit.html
+:: using exit /B 1 on specific command failures to fail-fast
+:: commands without the conditional are allowed to fail
+:: note: lines should only contain single commands to enforce this idiom
+exit /B 1
