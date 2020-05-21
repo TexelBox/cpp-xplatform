@@ -30,6 +30,9 @@ git:
 before_install:
   - git submodule update --init --recursive
 script:
+  # reference: https://github.com/travis-ci/travis-ci/issues/1066
+  # enable fast-fail (exit script when a simple command fails)
+  - set -e
   - cmake --version
   - cd scripts
   # print out file permissions to make sure shell scripts are executable (x-flag)
@@ -85,3 +88,4 @@ script:
   - cd ../scripts
   - ./run-internal-tests.sh --no-pause
   - ./run-external-tests.sh --no-pause
+  - set +e
