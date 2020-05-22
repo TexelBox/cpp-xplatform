@@ -31,18 +31,22 @@ before_install:
   - git submodule update --init --recursive
 script:
   # reference: https://github.com/travis-ci/travis-ci/issues/1066
+  # reference: https://travis-ci.community/t/multiline-script-not-failing-where-it-should/7644
   # enable fast-fail (exit script when a simple command fails)
-  - set -e
-  - cmake --version
-  - cd scripts
+  # note: the set -e/+e solution is unreliable (in particular, osx builds wrongly fail due to internal travis failures)
+  # reference: https://github.com/travis-ci/docs-travis-ci-com/issues/1672
+  # reference: https://travis-ci.community/t/build-fails-with-no-obvious-reason/1452
+  # '&& \' is used to concatenate all commands into a giant &&-list (former commands must succeed for latter commands to run)
+  - cmake --version && \
+  - cd scripts && \
   # print out file permissions to make sure shell scripts are executable (x-flag)
-  - ls -l
+  - ls -l && \
   # note: I run the shell script with --no-pause option to cause it to exit without pausing at the end, this is a fix to prevent travis from hanging for 10? minutes, since no key could be pressed to terminate
-  - ./dev-build-all.sh --no-pause
+  - ./dev-build-all.sh --no-pause && \
   # note: any directory changing within a shell script is isolated since it runs in a subshell
   # https://stackoverflow.com/questions/255414/why-doesnt-cd-work-in-a-shell-script
   # print out generated files
-  - cd ../build
+  - cd ../build && \
   # recursively search the directory structure from the current working directory (.) and print to console
   # http://man7.org/linux/man-pages/man1/find.1.html
   # the output of find is piped into sed (regex substitution) in order to make it look like an alias of tree command
@@ -50,42 +54,41 @@ script:
   # https://linux.die.net/man/1/sed
   # http://www.grymoire.com/Unix/Sed.html#uh-1
   # https://www.rexegg.com/regex-quickstart.html
-  - find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
-  - echo ======================================================
-  - echo ======================================================
+  - find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g' && \
+  - echo ====================================================== && \
+  - echo ====================================================== && \
   # DEBUG config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file Debug/cpp-xplatform
+  - file Debug/cpp-xplatform && \
   # print out these 2 files (useful info)
-  - cat Debug/Makefile
-  - cat Debug/CMakeCache.txt
-  - echo ======================================================
-  - echo ======================================================
+  - cat Debug/Makefile && \
+  - cat Debug/CMakeCache.txt && \
+  - echo ====================================================== && \
+  - echo ====================================================== && \
   # MINSIZEREL config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file MinSizeRel/cpp-xplatform
+  - file MinSizeRel/cpp-xplatform && \
   # print out these 2 files (useful info)
-  - cat MinSizeRel/Makefile
-  - cat MinSizeRel/CMakeCache.txt
-  - echo ======================================================
-  - echo ======================================================
+  - cat MinSizeRel/Makefile && \
+  - cat MinSizeRel/CMakeCache.txt && \
+  - echo ====================================================== && \
+  - echo ====================================================== && \
   # RELEASE config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file Release/cpp-xplatform
+  - file Release/cpp-xplatform && \
   # print out these 2 files (useful info)
-  - cat Release/Makefile
-  - cat Release/CMakeCache.txt
-  - echo ======================================================
-  - echo ======================================================
+  - cat Release/Makefile && \
+  - cat Release/CMakeCache.txt && \
+  - echo ====================================================== && \
+  - echo ====================================================== && \
   # RELWITHDEBINFO config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file RelWithDebInfo/cpp-xplatform
+  - file RelWithDebInfo/cpp-xplatform && \
   # print out these 2 files (useful info)
-  - cat RelWithDebInfo/Makefile
-  - cat RelWithDebInfo/CMakeCache.txt
-  - echo ======================================================
-  - echo ======================================================
-  - cd ../scripts
-  - ./run-internal-tests.sh --no-pause
+  - cat RelWithDebInfo/Makefile && \
+  - cat RelWithDebInfo/CMakeCache.txt && \
+  - echo ====================================================== && \
+  - echo ====================================================== && \
+  - cd ../scripts && \
+  - ./run-internal-tests.sh --no-pause && \
   - ./run-external-tests.sh --no-pause
-  - set +e
