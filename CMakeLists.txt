@@ -12,7 +12,9 @@ endif()
 
 # notably sets the PROJECT_NAME variable, C/CXX as default build-languages, but i'll overwrite it to just target CXX
 # https://cmake.org/cmake/help/latest/command/project.html
-project(cpp-xplatform LANGUAGES CXX)
+# note: including 'C' as a language is necessary to prevent some "CMAKE MISSING INTERNAL VARIABLES ERRORS" that can occur (has happened on Linux before)
+# reference: https://github.com/google/iree/issues/229
+project(cpp-xplatform LANGUAGES CXX C)
 
 # note: if ccache is installed as a wrapper around the compiler, it must have its SLOPPINESS config setting set (ENV vars are the highest priority scope way of doing this)
 # otherwise, cotire will complain and not generate the precompiled header (.pch/.gch), but it does issue this way of fixing it (thankfully!)
