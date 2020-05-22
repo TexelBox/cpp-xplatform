@@ -40,6 +40,87 @@ C++17 cross-platform template repository using CMake + Git Submodules.
 
 ---
 
+### REQUIREMENTS
+- note: a GitHub account is required if you want to take advantage of all the features, but you can still try out the project through git cloning.
+- note: AppVeyor / Travis CI accounts are required and must be linked to a GitHub repository if you want to take advantage of continuous integration (CI).
+- note: EditorConfig support/extensions in your IDE (VS 2017 has it by default) / text editor are required if you (and especially your team) want to take advantage of consistent coding standards (e.g. line endings, indentation (spaces vs. tabs, size), whitespace trimming, etc.).
+### Tools
+<table>
+    <tr>
+        <td>
+        </td>
+        <td>
+            Windows
+        </td>
+        <td>
+            Linux/macOS
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Git
+        </td>
+        <td>
+            yes (with Git Bash)
+        </td>
+        <td>
+            yes
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Bash or Dash
+        </td>
+        <td>
+        </td>
+        <td>
+            yes
+        </td>
+    </tr>
+    <tr>
+        <td>
+            CMake
+        </td>
+        <td>
+            yes (version >= 3.10)
+        </td>
+        <td>
+            yes (version >= 3.10)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            C++ compiler (see list below)
+        </td>
+        <td>
+            MSVC (via Visual Studio 2017)
+        </td>
+        <td>
+            GCC or Clang or Apple Clang
+        </td>
+    </tr>
+    <tr>
+        <td>
+            GNU Make
+        </td>
+        <td>
+        </td>
+        <td>
+            yes
+        </td>
+    </tr>
+    <tr>
+        <td>
+            nproc
+        </td>
+        <td>
+        </td>
+        <td>
+            yes (part of GNU coreutils)
+        </td>
+    </tr>
+</table>
+
 ### Supported compilers
 #### Minimum versions:
 - GCC (libstdc++) 7
