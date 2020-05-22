@@ -159,10 +159,16 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(cpp-xplatform PRIVATE /W4)
 endif()
 
-# reference: https://stackoverflow.com/questions/7304625/how-do-i-change-the-startup-project-of-a-visual-studio-solution-via-cmake
-# sets the startup project in the Visual Studio solution (so that user doesn't have to explicitly right click target and set option)
 if(MSVC)
+    # reference: https://stackoverflow.com/questions/7304625/how-do-i-change-the-startup-project-of-a-visual-studio-solution-via-cmake
+    # sets the startup project in the Visual Studio solution (so that user doesn't have to explicitly right click target and set option)
     set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT cpp-xplatform)
+
+    # reference: https://stackoverflow.com/questions/23950887/does-cmake-offer-a-method-to-set-the-working-directory-for-a-given-build-system
+    # reference: https://stackoverflow.com/questions/55713475/correct-use-of-vs-debugger-working-directory-etc
+    # sets the working directory root for all relative paths (e.g. for asset referencing) when running in Visual Studio
+    # by setting this to the same directory as where the executable is built, the program can be run either directly with the .exe or in VS
+    set_property(TARGET cpp-xplatform PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:cpp-xplatform>")
 endif()
 
 # cotire stuff (must go below target (cpp-xplatform) configuration above)
