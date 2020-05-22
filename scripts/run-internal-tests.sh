@@ -42,6 +42,15 @@ echo "BUILDING RELEASE INTERNAL TESTS..."
 echo "BUILDING RELWITHDEBINFO INTERNAL TESTS..."
 ./build/RelWithDebInfo/cpp-xplatform --dt-exit=true --dt-no-run=false
 
+# reference: https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
+# reference: https://unix.stackexchange.com/questions/53036/read-a-single-key-gives-an-error
+# reference: https://stackoverflow.com/questions/15744421/read-command-doesnt-wait-for-input
+# pause the script at the end (unless --no-pause option is set), until user wants to close it (analog to DOS-pause)
+# note: -r is the only POSIX option for read utility, whereas most solutions are bash-only
+# reference: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/read.html
 if [ $no_pause = "false" ] ; then
-    read -n1 -r -p "Press any key to continue . . . " key
+    # prompt user
+    printf "Press [ENTER] to continue . . . "
+    # read raw (-r) input into a dummy variable (_)
+    read -r _
 fi
