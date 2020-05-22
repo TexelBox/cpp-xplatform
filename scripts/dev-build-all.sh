@@ -52,28 +52,34 @@ echo "BUILDING DEBUG CONFIG..."
 mkdir -p build/Debug
 cd build/Debug
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../..
-make
+# reference: https://unix.stackexchange.com/questions/208568/how-to-determine-the-maximum-number-to-pass-to-make-j-option
+# reference: https://unix.stackexchange.com/questions/519092/what-is-the-logic-of-using-nproc-1-in-make-command
+# reference: https://stackoverflow.com/questions/15289250/make-j4-or-j8
+# reference: https://github.com/memkind/memkind/issues/33
+# -j$(($(nproc)+1)) is used to run multiple make jobs in parallel (nproc returns the number of logical processing units/cores)
+# note: nproc should be installed by default on most Linux systems (part of coreutils), but macOS users will probably get an error here and should install it
+make -j$(($(nproc)+1))
 cd ../..
 
 echo "BUILDING MINSIZEREL CONFIG..."
 mkdir -p build/MinSizeRel
 cd build/MinSizeRel
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=MinSizeRel -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../..
-make
+make -j$(($(nproc)+1))
 cd ../..
 
 echo "BUILDING RELEASE CONFIG..."
 mkdir -p build/Release
 cd build/Release
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../..
-make
+make -j$(($(nproc)+1))
 cd ../..
 
 echo "BUILDING RELWITHDEBINFO CONFIG..."
 mkdir -p build/RelWithDebInfo
 cd build/RelWithDebInfo
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../..
-make
+make -j$(($(nproc)+1))
 cd ../..
 
 # reference: https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause

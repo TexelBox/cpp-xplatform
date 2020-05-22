@@ -73,7 +73,7 @@ git submodule update --init --recursive
 dev-build-all.bat
 ```
 - note: you may have to run `./dev-build-all.bat` or `.\dev-build-all.bat` instead (depending on your shell).
-#### Linux/Mac:
+#### Linux/macOS:
 - use your favourite terminal to run
 ```
 ./dev-build-all.sh
@@ -95,15 +95,15 @@ chmod +x dev-build-all.sh
 #### For users...
 ##### Windows:
 - for best performance, double-click/run `cpp-xplatform.exe` in either x86/Release (32-bit) or x64/Release (64-bit).
-##### Linux/Mac:
+##### Linux/macOS:
 - for best performance, double-click/run `cpp-xplatform` in build/Release.
 
 #### For developers...
 ##### Windows:
 - if using `VS2017`, open either x86/cpp-xplatform.sln or x64/cpp-xplatform.sln and click the green arrow (you can also change the build config with the drop-down - use Debug when you need the debugger and Release when testing for performance).
-##### Linux:
+##### Linux/macOS:
 ```
-make
+make -j$(($(nproc)+1))
 ./cpp-xplatform
 ```
 ##### Different cmd-line options:
