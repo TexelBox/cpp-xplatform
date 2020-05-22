@@ -4,13 +4,23 @@ setlocal
 
 title RUN-INTERNAL-TESTS
 
+:: reference: https://stackoverflow.com/questions/17063947/get-current-batchfile-directory
+:: reference: https://stackoverflow.com/questions/18309941/what-does-it-mean-by-command-cd-d-dp0-in-windows
+:: handle users running this script from any directory
+:: get the path to the directory containing this script
+set "path_to_script_dir=%~dp0"
+echo PATH TO SCRIPT DIRECTORY = %path_to_script_dir%
+set "path_to_project_root_dir=%path_to_script_dir%.."
+echo PATH TO PROJECT ROOT DIRECTORY = %path_to_project_root_dir%
+:: execute rest of script from project root directory...
+:: note: /D allows changing the current drive (if needed)
+cd /D %path_to_project_root_dir% || goto error
+
 set "no_pause="
 echo args passed in: %*
 for %%a in (%*) do (
     if "%%a" == "--no-pause" (set "no_pause=y")
 )
-
-cd .. || goto error
 
 :: RUN x86...
 echo RUNNING x86+Debug internal tests...
