@@ -11,6 +11,18 @@
 # note: -o pipefail would be nice to add, but it is not POSIX
 set -eu
 
+# reference: https://stackoverflow.com/questions/59895/how-to-get-the-source-directory-of-a-bash-script-from-within-the-script-itself
+# handle users running this script from any directory
+# get the path to the directory containing this script
+# note: this solution is good enough (POSIX + works on multiple interpreters like sh/bash/dash)
+# note: there are flaws such as not handling symlinks or newline characters at end of directory names (very rare)
+path_to_script_dir="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
+echo "PATH TO SCRIPT DIRECTORY = $path_to_script_dir"
+path_to_project_root_dir="$path_to_script_dir/.."
+echo "PATH TO PROJECT ROOT DIRECTORY = $path_to_project_root_dir"
+# execute rest of script from project root directory...
+cd "$path_to_project_root_dir"
+
 no_pause="false"
 
 # reference: https://stackoverflow.com/questions/9994295/what-does-mean-in-a-shell-script
@@ -35,9 +47,6 @@ done
 # cmake -D sets a variable in the cmake cache (here I set the build config for the specific makefile that gets created)
 # I also set the PREFIX_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
 # https://cmake.org/cmake/help/v3.2/manual/cmake.1.html
-
-# execute rest of script from project root directory like it use to
-cd ..
 
 echo "BUILDING DEBUG CONFIG..."
 mkdir -p build/Debug
