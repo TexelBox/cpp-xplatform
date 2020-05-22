@@ -30,12 +30,12 @@ for %%a in (%*) do (
 )
 
 :: execute rest of script from project root directory as it used to
-cd ..
+cd .. || goto error
 
 :: BUILD x86...
 echo BUILDING FOR x86...
-:: note: if x86 directory already exists then it will just echo an error and the batch file will continue executing
-mkdir x86
+:: reference: https://stackoverflow.com/questions/4165387/create-folder-with-batch-but-only-if-it-doesnt-already-exist
+if not exist "x86\" (mkdir x86 || goto error)
 
 :: build all the VS2017 stuff (project files, the .sln, etc.)
 :: -H<source of CMakeLists.txt>
@@ -43,30 +43,43 @@ mkdir x86
 :: -G "<generator>"
 :: -D<variable to set in cmake cache>
 :: I set the PREFIX_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
-cmake -H. -Bx86 -G "Visual Studio 15 2017" -DPREFIX_BUILD_EXTERNAL_TESTS=ON
+cmake -H. -Bx86 -G "Visual Studio 15 2017" -DPREFIX_BUILD_EXTERNAL_TESTS=ON || goto error
 
 :: actually run MSBuild in the x86 build directory to generate all 4 configurations (4 executables)
-cmake --build x86 --config Debug
-cmake --build x86 --config MinSizeRel
-cmake --build x86 --config Release
-cmake --build x86 --config RelWithDebInfo
+cmake --build x86 --config Debug || goto error
+cmake --build x86 --config MinSizeRel || goto error
+cmake --build x86 --config Release || goto error
+cmake --build x86 --config RelWithDebInfo || goto error
 
 :: END of building for x86
 
 :: BUILD x64...
 echo BUILDING FOR x64...
-mkdir x64
-cmake -H. -Bx64 -G "Visual Studio 15 2017 Win64" -DPREFIX_BUILD_EXTERNAL_TESTS=ON
-cmake --build x64 --config Debug
-cmake --build x64 --config MinSizeRel
-cmake --build x64 --config Release
-cmake --build x64 --config RelWithDebInfo
+if not exist "x64\" (mkdir x64 || goto error)
+cmake -H. -Bx64 -G "Visual Studio 15 2017 Win64" -DPREFIX_BUILD_EXTERNAL_TESTS=ON || goto error
+cmake --build x64 --config Debug || goto error
+cmake --build x64 --config MinSizeRel || goto error
+cmake --build x64 --config Release || goto error
+cmake --build x64 --config RelWithDebInfo || goto error
 :: END of building for x64
 
-:: jump over pause if option set (useful for CI to not get hung)
-if defined no_pause (goto after_pause)
+:success
+:: don't pause if option set (useful for CI to not get hung)
 :: stop execution of batch file, until user hits a key
-pause
-:after_pause
+if not defined no_pause (pause)
+:: reference: https://ss64.com/nt/endlocal.html
+:: note: endlocal will happen implicitly when this script terminates
+:: clean-exit (ignore any residual ERRORLEVEL by overriding it with 0)
+exit /B 0
 
-endlocal
+:error
+echo ERROR
+:: don't pause if option set (useful for CI to not get hung)
+:: stop execution of batch file, until user hits a key
+if not defined no_pause (pause)
+:: reference: https://stackoverflow.com/questions/734598/how-do-i-make-a-batch-file-terminate-upon-encountering-an-error
+:: reference: https://ss64.com/nt/exit.html
+:: using exit /B 1 on specific command failures to fail-fast
+:: commands without the conditional are allowed to fail
+:: note: lines should only contain single commands to enforce this idiom
+exit /B 1

@@ -2,6 +2,15 @@
 # using the above shebang to be most-portable
 # https://stackoverflow.com/questions/10376206/what-is-the-preferred-bash-shebang
 
+# reference: https://stackoverflow.com/questions/2870992/automatic-exit-from-bash-shell-script-on-error
+# reference: https://pubs.opengroup.org/onlinepubs/009695399/utilities/set.html
+# reference: https://www.davidpashley.com/articles/writing-robust-shell-scripts/
+# (-e) - fail-fast (exit on first simple-command failure)
+# (-u) - fail on attempted expansion of uninitialized variables
+# note: &&/|| lists should not be used, cause -e only applies to the last statement in them
+# note: -o pipefail would be nice to add, but it is not POSIX
+set -eu
+
 no_pause="false"
 
 # reference: https://stackoverflow.com/questions/9994295/what-does-mean-in-a-shell-script
@@ -31,16 +40,32 @@ done
 cd ..
 
 echo "BUILDING DEBUG CONFIG..."
-mkdir -p build/Debug && cd build/Debug && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../.. && make && cd ../..
+mkdir -p build/Debug
+cd build/Debug
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../..
+make
+cd ../..
 
 echo "BUILDING MINSIZEREL CONFIG..."
-mkdir -p build/MinSizeRel && cd build/MinSizeRel && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=MinSizeRel -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../.. && make && cd ../..
+mkdir -p build/MinSizeRel
+cd build/MinSizeRel
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=MinSizeRel -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../..
+make
+cd ../..
 
 echo "BUILDING RELEASE CONFIG..."
-mkdir -p build/Release && cd build/Release && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../.. && make && cd ../..
+mkdir -p build/Release
+cd build/Release
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../..
+make
+cd ../..
 
 echo "BUILDING RELWITHDEBINFO CONFIG..."
-mkdir -p build/RelWithDebInfo && cd build/RelWithDebInfo && cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../.. && make && cd ../..
+mkdir -p build/RelWithDebInfo
+cd build/RelWithDebInfo
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPREFIX_BUILD_EXTERNAL_TESTS=ON ../..
+make
+cd ../..
 
 # pause the script at the end (unless --no-pause option is set), until user wants to close it (analog to DOS-pause)
 # https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
