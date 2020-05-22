@@ -156,7 +156,11 @@ target_compile_definitions(cpp-xplatform PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_compile_options(cpp-xplatform PRIVATE -Wall -Wextra)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(cpp-xplatform PRIVATE /W4)
+    # reference: https://devblogs.microsoft.com/cppblog/recommendations-to-speed-c-builds-in-visual-studio/
+    # reference: https://docs.microsoft.com/en-us/cpp/build/reference/mp-build-with-multiple-processes?view=vs-2019
+    # /MP is used for parallel compilation (automatically figures out number of effective processors on your system)
+    # note: /MP is incompatible with some compilation options, but they seem to have lesser value
+    target_compile_options(cpp-xplatform PRIVATE /MP /W4)
 endif()
 
 if(MSVC)
