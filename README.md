@@ -67,7 +67,6 @@ git submodule update --init --recursive
 
 ### Building (currently for developers only)
 - note: the enforced generators by the scripts are "Visual Studio 2017"/"Visual Studio 2017 Win64" and "Unix Makefiles" for their respective platforms. I won't be testing this repository with any other generator (use `cmake --help` for a list), but anybody can try using cmake manually to see if another generator works.
-- note: `cd scripts` before running any scripts (i.e. must run scripts from scripts/ directory).
 #### Windows:
 - double-click or use your favourite terminal to run
 ```
@@ -79,7 +78,8 @@ dev-build-all.bat
 ```
 ./dev-build-all.sh
 ```
-- note: if for some reason the script is non-executable, then run the script through an interpreter (only `bash` is tested, but you can try another like `sh`).
+- note: executing this way defaults to using `bash`.
+- note: if for some reason the script is non-executable, then run the script through an interpreter (only `bash` and `dash` are tested, but you can try others).
 ```
 bash dev-build-all.sh
 ```
