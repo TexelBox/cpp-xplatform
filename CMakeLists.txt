@@ -163,6 +163,15 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(cpp-xplatform PRIVATE /MP /W4)
 endif()
 
+#TODO: needs testing on more compiler versions!!!
+# reference: https://gitlab.kitware.com/cmake/cmake/issues/17834
+# linking to these libraries is required to fix filesystem linker errors
+if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_link_libraries(cpp-xplatform PRIVATE c++experimental)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    target_link_libraries(cpp-xplatform PRIVATE stdc++fs)
+endif()
+
 if(MSVC)
     # reference: https://stackoverflow.com/questions/7304625/how-do-i-change-the-startup-project-of-a-visual-studio-solution-via-cmake
     # sets the startup project in the Visual Studio solution (so that user doesn't have to explicitly right click target and set option)

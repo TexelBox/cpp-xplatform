@@ -14,8 +14,15 @@
 
 #include <cpp-xplatform/utils/string-utils.hpp>
 
-//NOTE: apparently this is the proper way to forward declare namespaced-functions (you can't do "int prefix::program(int argc, char *argv[]);")
 namespace prefix {
+    // NAMESPACE GLOBALS...
+    //NOTE: these initial values correspond to the relative paths that could be used if the user always ran the executable inside the binary directory (i.e. cwd == binary directory),
+    //      this should not be assumed so they will be overwritten properly with absolute paths
+    std::string g_pathToAssetsDirectory{"../../assets/"};
+    std::string g_pathToBinaryDirectory{""};
+    std::string g_pathToProjectRootDirectory{"../../"};
+
+    //NOTE: apparently this is the proper way to forward declare namespaced-functions (you can't do "int prefix::program(int argc, char *argv[]);")
     int program(int argc, char *argv[]);
 }
 
@@ -54,6 +61,27 @@ namespace prefix {
     // user-defined program...
     int program(int argc, char *argv[]) {
         // handle cmd-line args/options...
+
+        // set namespace globals...
+        // reference: https://stackoverflow.com/questions/143174/how-do-i-get-the-directory-that-a-program-is-running-from
+        // find base paths...
+        //NOTE: these aren't given with trailing '\' or '/'
+        auto const pathToBinaryDirectoryTemp{std::experimental::filesystem::canonical(std::experimental::filesystem::path(argv[0])).parent_path()};
+        auto const pathToProjectRootDirectoryTemp{pathToBinaryDirectoryTemp.parent_path().parent_path()};
+        auto const pathToAssetsDirectoryTemp{pathToProjectRootDirectoryTemp / "/assets"};
+        // append "/" suffix...
+        g_pathToBinaryDirectory = pathToBinaryDirectoryTemp.string() + "/";
+        g_pathToProjectRootDirectory = pathToProjectRootDirectoryTemp.string() + "/";
+        g_pathToAssetsDirectory = pathToAssetsDirectoryTemp.string() + "/";
+        // windows paths will be given with the native '\' path separator, so for cleanliness they get replaced with the portable '/'
+        std::replace(g_pathToBinaryDirectory.begin(), g_pathToBinaryDirectory.end(), '\\', '/');
+        std::replace(g_pathToProjectRootDirectory.begin(), g_pathToProjectRootDirectory.end(), '\\', '/');
+        std::replace(g_pathToAssetsDirectory.begin(), g_pathToAssetsDirectory.end(), '\\', '/');
+        // print to confirm these paths are accurate...
+        std::cout << "PATH TO BINARY DIRECTORY = " << g_pathToBinaryDirectory << std::endl;
+        std::cout << "PATH TO PROJECT ROOT DIRECTORY = " << g_pathToProjectRootDirectory << std::endl;
+        std::cout << "PATH TO ASSETS DIRECTORY = " << g_pathToAssetsDirectory << std::endl;
+
         // ignore doctest options (those prefixed with "--dt-"
         std::vector<std::string> const args = getProgramArgs(argc, argv);
         // now, do something specific to your program with args...
