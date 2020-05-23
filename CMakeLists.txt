@@ -167,7 +167,8 @@ endif()
 # reference: https://gitlab.kitware.com/cmake/cmake/issues/17834
 # linking to these libraries is required to fix filesystem linker errors
 if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_link_libraries(cpp-xplatform PRIVATE c++experimental)
+    # reference: https://stackoverflow.com/questions/49577343/filesystem-with-c17-doesnt-work-on-my-mac-os-x-high-sierra
+    target_link_libraries(cpp-xplatform PRIVATE c++fs)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     target_link_libraries(cpp-xplatform PRIVATE stdc++fs)
 endif()
