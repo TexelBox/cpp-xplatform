@@ -1,5 +1,7 @@
-#include <doctest/doctest.h>
+// #include "common.test.h" should be the first include directive inside all external-test implementation (e.g. .test.cpp) files
+#include "common.test.h"
 
+// include the implementation file we are testing...
 #include <cpp-xplatform/utils/string-utils.hpp>
 
 namespace prefix::utils {
