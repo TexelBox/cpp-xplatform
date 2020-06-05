@@ -11,8 +11,10 @@
 //      int main(int argc, char** argv) { return doctest::Context(argc, argv).run(); }
 //      DOCTEST_MSVC_SUPPRESS_WARNING_POP
 //      #endif // DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-//NOTE: this macro must be defined before #include <doctest/doctest.h> (via #include "common.test.h")
+//NOTE: these macros must be defined before #include <doctest/doctest.h> (via #include "common.test.h")
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+// force doctest cmd-line options to have to be prefixed with "--dt-", thus to not interfere with user-specific option naming (e.g. a common option like --version can now be used without doctest option overriding it)
+#define DOCTEST_CONFIG_NO_UNPREFIXED_OPTIONS
 // #include "common.test.h" should be the first include directive inside all external-test implementation (e.g. .test.cpp) files
 #include "common.test.h"
 
