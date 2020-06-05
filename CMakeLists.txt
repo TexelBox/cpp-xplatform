@@ -123,6 +123,29 @@ target_include_directories(cpp-xplatform
         "${CMAKE_CURRENT_SOURCE_DIR}/deps/doctest"
 )
 
+# set the path macros that can be used inside the program (e.g. for finding assets)
+# this is useful since it allows finding assets with absolute paths (thus the CWD when running the executable doesn't matter)
+# the downside is that if these paths were to change on disk, the program would fail and a CMake rebuild is required to update the macros
+# note: CMake path macros are absolute paths that use '/' as the path separator regardless of platform and don't have a trailing '/'
+# note: the paths are surrounded with quotes in order for the macros to be passed in as strings (and thus not have to be stringified through another macro in the code)
+# WARNING: if a CMake error ever occurs due to the quotes, you can fix this by consulting this issue...
+# reference: https://github.com/LLNL/lbann/issues/117
+set(PATH_TO_ASSETS_DIRECTORY "\"${CMAKE_CURRENT_SOURCE_DIR}/assets/\"")
+# e.g. the path to the directory containing the .vcxproj for Visual Studio generator, or the directory containing the Makefile for Unix Makefiles generator
+set(PATH_TO_BUILD_SYSTEM_DIRECTORY "\"${CMAKE_CURRENT_BINARY_DIR}/\"")
+set(PATH_TO_PROJECT_ROOT_DIRECTORY "\"${CMAKE_CURRENT_SOURCE_DIR}/\"")
+
+message(STATUS "WARNING: these paths are constant from the latest CMake build.\n
+                They may be used as macros inside the program (e.g. for finding assets).\n
+                Thus, a CMake rebuild is needed if the paths on disk have changed (e.g. renaming a directory in the chain, moving the project, etc.).\n"
+)
+message(STATUS "setting macros for paths...\n
+                PATH_TO_ASSETS_DIRECTORY = ${PATH_TO_ASSETS_DIRECTORY}\n
+                PATH_TO_BUILD_SYSTEM_DIRECTORY = ${PATH_TO_BUILD_SYSTEM_DIRECTORY}\n
+                PATH_TO_PROJECT_ROOT_DIRECTORY = ${PATH_TO_PROJECT_ROOT_DIRECTORY}\n"
+)
+
+# set universal compile-definitions / macros...
 # reference: https://github.com/onqtam/doctest/blob/master/doc/markdown/configuration.md#doctest_config_use_std_headers
 # globally defining DOCTEST_CONFIG_USE_STD_HEADERS is required to make our application compliant to c++ standards
 # it forces doctest to include the relevant std headers (notably std::ostream) rather than using doctest's custom forward declarations
@@ -133,7 +156,7 @@ target_include_directories(cpp-xplatform
 # https://github.com/onqtam/doctest/issues/126
 # todo: the above link might suggest that other definitions are needed (to fix other linker errors) like DOCTEST_CONFIG_ASSERTION_PARAMETERS_BY_VALUE, but I will only add those if needed frequently or for good reason
 # https://github.com/onqtam/doctest/issues/183
-target_compile_definitions(cpp-xplatform PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS)
+target_compile_definitions(cpp-xplatform PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS PATH_TO_ASSETS_DIRECTORY=${PATH_TO_ASSETS_DIRECTORY} PATH_TO_BUILD_SYSTEM_DIRECTORY=${PATH_TO_BUILD_SYSTEM_DIRECTORY} PATH_TO_PROJECT_ROOT_DIRECTORY=${PATH_TO_PROJECT_ROOT_DIRECTORY})
 
 # https://foonathan.net/blog/2018/10/17/cmake-warnings.html
 # set the warning flags for the respective compilers using cmake generator expressions

@@ -9,4 +9,18 @@ add_executable(cpp-xplatform-external-tests ${PREFIX_EXTERNAL_TESTING_SOURCE_FIL
 
 target_include_directories(cpp-xplatform-external-tests PRIVATE "${PROJECT_SOURCE_DIR}/deps/doctest" "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src")
 
-target_compile_definitions(cpp-xplatform-external-tests PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS)
+# overwrite this variable locally with the binary directory for this tests target
+# the other two paths are the same
+set(PATH_TO_BUILD_SYSTEM_DIRECTORY "\"${CMAKE_CURRENT_BINARY_DIR}/\"")
+
+message(STATUS "WARNING: these paths are constant from the latest CMake build.\n
+                They may be used as macros inside the program (e.g. for finding assets).\n
+                Thus, a CMake rebuild is needed if the paths on disk have changed (e.g. renaming a directory in the chain, moving the project, etc.).\n"
+)
+message(STATUS "setting macros for paths...\n
+                PATH_TO_ASSETS_DIRECTORY = ${PATH_TO_ASSETS_DIRECTORY}\n
+                PATH_TO_BUILD_SYSTEM_DIRECTORY = ${PATH_TO_BUILD_SYSTEM_DIRECTORY}\n
+                PATH_TO_PROJECT_ROOT_DIRECTORY = ${PATH_TO_PROJECT_ROOT_DIRECTORY}\n"
+)
+
+target_compile_definitions(cpp-xplatform-external-tests PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS PATH_TO_ASSETS_DIRECTORY=${PATH_TO_ASSETS_DIRECTORY} PATH_TO_BUILD_SYSTEM_DIRECTORY=${PATH_TO_BUILD_SYSTEM_DIRECTORY} PATH_TO_PROJECT_ROOT_DIRECTORY=${PATH_TO_PROJECT_ROOT_DIRECTORY})

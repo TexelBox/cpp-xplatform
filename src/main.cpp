@@ -27,6 +27,24 @@ namespace prefix {
 // USAGE#3: ./cpp-xplatform --dt-exit=true --dt-no-run=false (runs just the internal tests)
 // reminder: argv[0] usually contains the executable name, argv[argc] is always a null pointer
 int main(int argc, char *argv[]) {
+    // print out macro information...
+    std::cout << "MACRO INFORMATION:" << std::endl;
+    #ifdef PATH_TO_ASSETS_DIRECTORY
+    std::cout << "PATH_TO_ASSETS_DIRECTORY = " << "\"" << PATH_TO_ASSETS_DIRECTORY << "\"" << std::endl;
+    #else
+        #error "ERROR: PATH_TO_ASSETS_DIRECTORY macro is undefined! Please make sure your build-system/generator (e.g. CMake) sets it properly."
+    #endif
+    #ifdef PATH_TO_BUILD_SYSTEM_DIRECTORY
+    std::cout << "PATH_TO_BUILD_SYSTEM_DIRECTORY = " << "\"" << PATH_TO_BUILD_SYSTEM_DIRECTORY << "\"" << std::endl;
+    #else
+        #error "ERROR: PATH_TO_BUILD_SYSTEM_DIRECTORY macro is undefined! Please make sure your build-system/generator (e.g. CMake) sets it properly."
+    #endif
+    #ifdef PATH_TO_PROJECT_ROOT_DIRECTORY
+    std::cout << "PATH_TO_PROJECT_ROOT_DIRECTORY = " << "\"" << PATH_TO_PROJECT_ROOT_DIRECTORY << "\"" << std::endl;
+    #else
+        #error "ERROR: PATH_TO_PROJECT_ROOT_DIRECTORY macro is undefined! Please make sure your build-system/generator (e.g. CMake) sets it properly."
+    #endif
+
     doctest::Context ctx;
     // default behaviour (cmd-line options) specify to just run the user-defined program
     // this behaviour can be overriden by explicitly passing in cmd-line options (as shown above by the usage scenarios)
