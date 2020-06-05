@@ -2,6 +2,7 @@
 #define PREFIX_PCH_H_
 
 #include <cstdlib>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
