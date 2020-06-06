@@ -18,6 +18,7 @@
 #define DOCTEST_CONFIG_NO_UNPREFIXED_OPTIONS
 #include <doctest/doctest.h>
 
+// forward declarations...
 //NOTE: apparently this is the proper way to forward declare namespaced-functions (you can't do "int prefix::program(int argc, char *argv[]);")
 namespace prefix {
     int program(int argc, char *argv[]);
@@ -52,24 +53,25 @@ int main(int argc, char *argv[]) {
     ctx.applyCommandLine(argc, argv);
     // run doctest test runner
     //NOTE: run() returns 0 if --dt-no-run=true, otherwise returns either 0 (if all tests succeeded) or 1 (any test failed)
-    int const testingResult = ctx.run();
+    int const testingResult{ctx.run()};
 
     // if --dt-exit=true or a query flag was passed in by user, force quit application without running user-defined program
     if (ctx.shouldExit()) return testingResult;
 
     // run user-defined program...
-    int const programResult = prefix::program(argc, argv);
+    int const programResult{prefix::program(argc, argv)};
     return testingResult + programResult;
 }
 
 namespace prefix {
-    std::vector<std::string> getProgramArgs(int argc, char *argv[]);
+    // forward declarations...
+    std::vector<std::string> getProgramArgs(int const argc, char const*const argv[]);
 
     // user-defined program...
     int program(int argc, char *argv[]) {
         // handle cmd-line args/options...
         // ignore doctest options (those prefixed with "--dt-"
-        std::vector<std::string> const args = getProgramArgs(argc, argv);
+        std::vector<std::string> const args{getProgramArgs(argc, argv)};
         // now, do something specific to your program with args...
 
         // execute the rest of your program...
@@ -82,20 +84,20 @@ namespace prefix {
     }
 
     // removes the doctest options and returns only relevant cmd-line args for user-defined program usage
-    std::vector<std::string> getProgramArgs(int argc, char *argv[]) {
+    std::vector<std::string> getProgramArgs(int const argc, char const*const argv[]) {
         std::vector<std::string> args;
-        for (unsigned int i = 0; i < argc; ++i) {
-            std::string const nextArg = argv[i];
-            std::string const prefix = nextArg.substr(0, 5);
-            if ("--dt-" != prefix) args.push_back(nextArg);
+        for (unsigned int i{0}; i < argc; ++i) {
+            std::string const arg{argv[i]};
+            std::string const prefix{arg.substr(0, 5)};
+            if ("--dt-" != prefix) args.push_back(arg);
         }
         return args;
     }
 
     DOCTEST_TEST_CASE("internal-test-example-0") {
-        int const argc = 3;
-        char *argv[argc] = {"--dt-exit=true", "--dt-no-run=false", "--version"};
-        std::vector<std::string> const args = getProgramArgs(argc, argv);
+        int const ARGC{3};
+        char const*const ARGV[ARGC]{"--dt-exit=true", "--dt-no-run=false", "--version"};
+        std::vector<std::string> const args{getProgramArgs(ARGC, ARGV)};
         //NOTE: you can't do the below, since its too complex for doctest and must be a binary expression
         //DOCTEST_CHECK(1 == args.size() && "--version" == args.at(0));
         DOCTEST_REQUIRE(1 == args.size());
