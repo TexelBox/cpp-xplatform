@@ -5,8 +5,8 @@
 #include <cpp-xplatform/utils/string-utils.hpp>
 
 namespace prefix::utils {
-    TEST_CASE("external-test-example-0") {
-        CHECK("" == trim_copy(""));
-        CHECK(rtrim_copy(ltrim_copy("    hello    ")) == trim_copy("    hello    "));
+    DOCTEST_TEST_CASE("external-test-example-0") {
+        DOCTEST_CHECK("" == trim_copy(""));
+        DOCTEST_CHECK(rtrim_copy(ltrim_copy("    hello    ")) == trim_copy("    hello    "));
     }
 }

@@ -23,12 +23,12 @@
 
 // test asset-finding using the macro as prefix
 // this test-case also illustrates the usage of the macro
-TEST_CASE("external-test-asset-finding") {
+DOCTEST_TEST_CASE("external-test-asset-finding") {
     std::ifstream ifs;
     std::string filePath{PATH_TO_ASSETS_DIRECTORY};
     filePath += "test-files/test-asset-finding.txt";
     ifs.open(filePath);
-    CHECK(ifs);
+    DOCTEST_CHECK(ifs);
 }
 
 namespace prefix {

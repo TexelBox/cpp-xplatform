@@ -27,12 +27,12 @@ namespace prefix {
 
 // test asset-finding using the macro as prefix
 // this test-case also illustrates the usage of the macro
-TEST_CASE("internal-test-asset-finding") {
+DOCTEST_TEST_CASE("internal-test-asset-finding") {
     std::ifstream ifs;
     std::string filePath{PATH_TO_ASSETS_DIRECTORY};
     filePath += "test-files/test-asset-finding.txt";
     ifs.open(filePath);
-    CHECK(ifs);
+    DOCTEST_CHECK(ifs);
 }
 
 // reference: https://github.com/onqtam/doctest/blob/master/doc/markdown/commandline.md
@@ -94,13 +94,13 @@ namespace prefix {
         return args;
     }
 
-    TEST_CASE("internal-test-example-0") {
+    DOCTEST_TEST_CASE("internal-test-example-0") {
         int const argc = 3;
         char *argv[argc] = {"--dt-exit=true", "--dt-no-run=false", "--version"};
         std::vector<std::string> const args = getProgramArgs(argc, argv);
         //NOTE: you can't do the below, since its too complex for doctest and must be a binary expression
-        //CHECK(1 == args.size() && "--version" == args.at(0));
-        REQUIRE(1 == args.size());
-        CHECK("--version" == args.at(0));
+        //DOCTEST_CHECK(1 == args.size() && "--version" == args.at(0));
+        DOCTEST_REQUIRE(1 == args.size());
+        DOCTEST_CHECK("--version" == args.at(0));
     }
 }
