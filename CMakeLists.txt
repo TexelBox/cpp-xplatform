@@ -187,7 +187,8 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(cpp-xplatform PRIVATE /MP /W4)
 endif()
 
-if(MSVC)
+# reference: https://stackoverflow.com/questions/26836361/check-if-generating-a-visual-studio-solution-or-makefile-from-cmake
+if(CMAKE_GENERATOR MATCHES "Visual Studio")
     # reference: https://stackoverflow.com/questions/7304625/how-do-i-change-the-startup-project-of-a-visual-studio-solution-via-cmake
     # sets the startup project in the Visual Studio solution (so that user doesn't have to explicitly right click target and set option)
     set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT cpp-xplatform)
