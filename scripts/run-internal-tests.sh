@@ -30,16 +30,16 @@ do
     fi
 done
 
-echo "BUILDING DEBUG INTERNAL TESTS..."
+echo "RUNNING DEBUG INTERNAL TESTS..."
 ./build/Debug/cpp-xplatform --dt-exit=true --dt-no-run=false
 
-echo "BUILDING MINSIZEREL INTERNAL TESTS..."
+echo "RUNNING MINSIZEREL INTERNAL TESTS..."
 ./build/MinSizeRel/cpp-xplatform --dt-exit=true --dt-no-run=false
 
-echo "BUILDING RELEASE INTERNAL TESTS..."
+echo "RUNNING RELEASE INTERNAL TESTS..."
 ./build/Release/cpp-xplatform --dt-exit=true --dt-no-run=false
 
-echo "BUILDING RELWITHDEBINFO INTERNAL TESTS..."
+echo "RUNNING RELWITHDEBINFO INTERNAL TESTS..."
 ./build/RelWithDebInfo/cpp-xplatform --dt-exit=true --dt-no-run=false
 
 # reference: https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
