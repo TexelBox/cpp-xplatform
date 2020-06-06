@@ -18,8 +18,6 @@
 #define DOCTEST_CONFIG_NO_UNPREFIXED_OPTIONS
 #include <doctest/doctest.h>
 
-#include <cpp-xplatform/utils/string-utils.hpp>
-
 //NOTE: apparently this is the proper way to forward declare namespaced-functions (you can't do "int prefix::program(int argc, char *argv[]);")
 namespace prefix {
     int program(int argc, char *argv[]);

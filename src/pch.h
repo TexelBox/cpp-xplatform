@@ -28,4 +28,6 @@
 
 #include <doctest/doctest.h>
 
+#include <cpp-xplatform/utils/string-utils.hpp>
+
 #endif // PREFIX_PCH_H_
