@@ -4,6 +4,7 @@
 - [**HOW DO I ADD TESTS?**](#how-do-i-add-tests)
 - [**HOW DO I GET CMAKE TO RECOGNIZE AN ADDED/RENAMED/DELETED FILE?**](#how-do-i-get-cmake-to-recognize-an-addedrenameddeleted-file)
 - [**HOW DO I INITIALIZE/UPDATE ALL GIT SUBMODULES RECURSIVELY?**](#how-do-i-initializeupdate-all-git-submodules-recursively)
+- [**HOW DO I SKIP CONTINUOUS INTEGRATION ON THE NEXT COMMIT?**](#how-do-i-skip-continuous-integration-on-the-next-commit)
 - [**HOW DO I STAGE A NEW SHELL SCRIPT WITH EXECUTABLE PERMISSION?**](#how-do-i-stage-a-new-shell-script-with-executable-permission)
 - [**HOW DO I UPGRADE GIT SUBMODULES TO THEIR LATEST COMMITS?**](#how-do-i-upgrade-git-submodules-to-their-latest-commits)
 - [**HOW DO I VIEW THE ENTIRE PROJECT DIRECTORY STRUCTURE IN VISUAL STUDIO?**](#how-do-i-view-the-entire-project-directory-structure-in-visual-studio)
@@ -53,6 +54,20 @@ which triggers a CMake rebuild the next time you open up your IDE (e.g. Visual S
 #### HOW DO I INITIALIZE/UPDATE ALL GIT SUBMODULES RECURSIVELY?
 ```
 git submodule update --init --recursive
+```
+
+#### HOW DO I SKIP CONTINUOUS INTEGRATION ON THE NEXT COMMIT?
+- Skip all...
+```
+git commit -m "[skip ci] message"
+```
+- Skip AppVeyor only...
+```
+git commit -m "[skip appveyor] message"
+```
+- Skip Travis CI only...
+```
+git commit -m "[skip travis] message"
 ```
 
 #### HOW DO I STAGE A NEW SHELL SCRIPT WITH EXECUTABLE PERMISSION?
