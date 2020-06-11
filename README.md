@@ -55,7 +55,9 @@ C++17 cross-platform template repository using CMake + Git Submodules.
 ---
 
 ### Preamble
-If you find this repository to be useful, you may show support by starring the repository or contacting me more directly (contact info may be found via my GitHub profile). Please feel free to share any projects you create. I would love to see them, especially if they are other template repositories! Any comments, feedback, or criticisms are welcome as long as they are communicated in a constructive and respectful manner.
+If you find this repository to be useful, you may show support by starring the repository or contacting me more directly (contact info may be found via my GitHub profile). Please feel free to share any projects you create. I would love to see them, especially if they are other template repositories! Any comments, questions, feedback, or criticisms are welcome as long as they are communicated in a constructive and respectful manner.
+
+<a href="https://github.com/TexelBox/cpp-xplatform/issues/9" target="_blank">General Discussion Board</a>
 
 ### Contributing
 If you identify any bugs or wish to request a feature, please submit an issue on GitHub after consulting the appropriate template (help document).<br />
