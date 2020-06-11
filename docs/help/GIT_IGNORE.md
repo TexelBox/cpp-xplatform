@@ -1,0 +1,2 @@
+- Every repository should have a `.gitignore` file in the project root directory.
+- This file is used to inform Git which untracked files you don't want in version control. For example, you may have some user-specific files in your local working-directory which you never want pushed up to the remote repository as they serve no use to other developers or users. You also want to ignore frequently changing or temporary files such as build output.
