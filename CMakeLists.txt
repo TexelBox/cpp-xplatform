@@ -16,6 +16,13 @@ endif()
 # reference: https://github.com/google/iree/issues/229
 project(cpp-xplatform LANGUAGES CXX C)
 
+# reference: https://cmake.org/cmake/help/v3.16/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html
+# generates a 'compile_commands.json' for each config that contains compile information for all translation units
+# this allows some tools to function better (e.g. VS Code can now detect a compile_commands.json, reference it in a .vscode/c_cpp_properties.json and allow the IntelliSense to find missing compile information such as compile-definitions / macros)
+# implemented by 'Makefile Generators' and 'Ninja', ignored otherwise
+# WARNING: this may conflict with unity builds
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # note: if ccache is installed as a wrapper around the compiler, it must have its SLOPPINESS config setting set (ENV vars are the highest priority scope way of doing this)
 # otherwise, cotire will complain and not generate the precompiled header (.pch/.gch), but it does issue this way of fixing it (thankfully!)
 if(${CMAKE_HOST_SYSTEM_NAME} MATCHES "Darwin" OR ${CMAKE_HOST_SYSTEM_NAME} MATCHES "Linux")
