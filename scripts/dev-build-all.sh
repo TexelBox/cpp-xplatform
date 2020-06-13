@@ -45,13 +45,13 @@ done
 # https://stackoverflow.com/questions/5130847/running-multiple-commands-in-one-line-in-shell
 # cmake -G sets the generator to use
 # cmake -D sets a variable in the cmake cache (here I set the build config for the specific makefile that gets created)
-# I also set the PROJECT_NAME_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
+# I also set the project-name_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
 # https://cmake.org/cmake/help/v3.2/manual/cmake.1.html
 
 echo "BUILDING DEBUG CONFIG..."
 mkdir -p build/Debug
 cd build/Debug
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DPROJECT_NAME_BUILD_EXTERNAL_TESTS=ON ../..
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../..
 echo "COMPILING DEBUG CONFIG..."
 # reference: https://unix.stackexchange.com/questions/208568/how-to-determine-the-maximum-number-to-pass-to-make-j-option
 # reference: https://unix.stackexchange.com/questions/519092/what-is-the-logic-of-using-nproc-1-in-make-command
@@ -65,7 +65,7 @@ cd ../..
 echo "BUILDING MINSIZEREL CONFIG..."
 mkdir -p build/MinSizeRel
 cd build/MinSizeRel
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=MinSizeRel -DPROJECT_NAME_BUILD_EXTERNAL_TESTS=ON ../..
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=MinSizeRel -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../..
 echo "COMPILING MINSIZEREL CONFIG..."
 make -j$(($(nproc)+1))
 cd ../..
@@ -73,7 +73,7 @@ cd ../..
 echo "BUILDING RELEASE CONFIG..."
 mkdir -p build/Release
 cd build/Release
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -DPROJECT_NAME_BUILD_EXTERNAL_TESTS=ON ../..
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../..
 echo "COMPILING RELEASE CONFIG..."
 make -j$(($(nproc)+1))
 cd ../..
@@ -81,7 +81,7 @@ cd ../..
 echo "BUILDING RELWITHDEBINFO CONFIG..."
 mkdir -p build/RelWithDebInfo
 cd build/RelWithDebInfo
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DPROJECT_NAME_BUILD_EXTERNAL_TESTS=ON ../..
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../..
 echo "COMPILING RELWITHDEBINFO CONFIG..."
 make -j$(($(nproc)+1))
 cd ../..

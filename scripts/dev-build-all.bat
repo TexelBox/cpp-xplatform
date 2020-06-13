@@ -51,8 +51,8 @@ if not exist "x86\" (mkdir x86 || goto error)
 :: -B<build directory>
 :: -G "<generator>"
 :: -D<variable to set in cmake cache>
-:: I set the PROJECT_NAME_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
-cmake -H. -Bx86 -G "Visual Studio 15 2017" -DPROJECT_NAME_BUILD_EXTERNAL_TESTS=ON || goto error
+:: I set the project-name_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
+cmake -H. -Bx86 -G "Visual Studio 15 2017" -Dproject-name_BUILD_EXTERNAL_TESTS=ON || goto error
 
 :: actually run MSBuild in the x86 build directory to generate all 4 configurations (4 executables)
 echo COMPILING DEBUG CONFIG...
@@ -69,7 +69,7 @@ cmake --build x86 --config RelWithDebInfo || goto error
 :: BUILD x64...
 echo BUILDING ALL CONFIGS FOR x64...
 if not exist "x64\" (mkdir x64 || goto error)
-cmake -H. -Bx64 -G "Visual Studio 15 2017 Win64" -DPROJECT_NAME_BUILD_EXTERNAL_TESTS=ON || goto error
+cmake -H. -Bx64 -G "Visual Studio 15 2017 Win64" -Dproject-name_BUILD_EXTERNAL_TESTS=ON || goto error
 echo COMPILING DEBUG CONFIG...
 cmake --build x64 --config Debug || goto error
 echo COMPILING MINSIZEREL CONFIG...
