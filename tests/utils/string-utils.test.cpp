@@ -2,9 +2,9 @@
 #include "common.test.h"
 
 // include the implementation file we are testing...
-#include <cpp-xplatform/utils/string-utils.hpp>
+#include <project-name/utils/string-utils.hpp>
 
-namespace prefix::utils {
+namespace project_name::utils {
     DOCTEST_TEST_CASE("external-test-example-0") {
         DOCTEST_CHECK("" == trim_copy(""));
         DOCTEST_CHECK(rtrim_copy(ltrim_copy("    hello    ")) == trim_copy("    hello    "));

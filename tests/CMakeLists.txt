@@ -3,11 +3,11 @@ if(POLICY CMP0037)
     cmake_policy(SET CMP0037 OLD)
 endif()
 
-file(GLOB_RECURSE PREFIX_EXTERNAL_TESTING_SOURCE_FILES "${CMAKE_CURRENT_LIST_DIR}/*.c" "${CMAKE_CURRENT_LIST_DIR}/*.cc" "${CMAKE_CURRENT_LIST_DIR}/*.cxx" "${CMAKE_CURRENT_LIST_DIR}/*.cpp" "${CMAKE_CURRENT_LIST_DIR}/*.c++" "${CMAKE_CURRENT_LIST_DIR}/*.h" "${CMAKE_CURRENT_LIST_DIR}/*.hh" "${CMAKE_CURRENT_LIST_DIR}/*.hpp" "${CMAKE_CURRENT_LIST_DIR}/*.h++")
-message(STATUS "external testing source files = ${PREFIX_EXTERNAL_TESTING_SOURCE_FILES}")
-add_executable(cpp-xplatform-external-tests ${PREFIX_EXTERNAL_TESTING_SOURCE_FILES})
+file(GLOB_RECURSE PROJECT_NAME_EXTERNAL_TESTING_SOURCE_FILES "${CMAKE_CURRENT_LIST_DIR}/*.c" "${CMAKE_CURRENT_LIST_DIR}/*.cc" "${CMAKE_CURRENT_LIST_DIR}/*.cxx" "${CMAKE_CURRENT_LIST_DIR}/*.cpp" "${CMAKE_CURRENT_LIST_DIR}/*.c++" "${CMAKE_CURRENT_LIST_DIR}/*.h" "${CMAKE_CURRENT_LIST_DIR}/*.hh" "${CMAKE_CURRENT_LIST_DIR}/*.hpp" "${CMAKE_CURRENT_LIST_DIR}/*.h++")
+message(STATUS "external testing source files = ${PROJECT_NAME_EXTERNAL_TESTING_SOURCE_FILES}")
+add_executable(project-name-external-tests ${PROJECT_NAME_EXTERNAL_TESTING_SOURCE_FILES})
 
-target_include_directories(cpp-xplatform-external-tests PRIVATE "${PROJECT_SOURCE_DIR}/tests" "${PROJECT_SOURCE_DIR}/deps/doctest" "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src")
+target_include_directories(project-name-external-tests PRIVATE "${PROJECT_SOURCE_DIR}/tests" "${PROJECT_SOURCE_DIR}/deps/doctest" "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/src")
 
 # overwrite this variable locally with the binary directory for this tests target
 # the other two paths are the same
@@ -23,8 +23,8 @@ message(STATUS "setting macros for paths...\n
                 PATH_TO_PROJECT_ROOT_DIRECTORY = ${PATH_TO_PROJECT_ROOT_DIRECTORY}\n"
 )
 
-target_compile_definitions(cpp-xplatform-external-tests PRIVATE DOCTEST_CONFIG_NO_SHORT_MACRO_NAMES DOCTEST_CONFIG_USE_STD_HEADERS PATH_TO_ASSETS_DIRECTORY=${PATH_TO_ASSETS_DIRECTORY} PATH_TO_BUILD_SYSTEM_DIRECTORY=${PATH_TO_BUILD_SYSTEM_DIRECTORY} PATH_TO_PROJECT_ROOT_DIRECTORY=${PATH_TO_PROJECT_ROOT_DIRECTORY})
+target_compile_definitions(project-name-external-tests PRIVATE DOCTEST_CONFIG_NO_SHORT_MACRO_NAMES DOCTEST_CONFIG_USE_STD_HEADERS PATH_TO_ASSETS_DIRECTORY=${PATH_TO_ASSETS_DIRECTORY} PATH_TO_BUILD_SYSTEM_DIRECTORY=${PATH_TO_BUILD_SYSTEM_DIRECTORY} PATH_TO_PROJECT_ROOT_DIRECTORY=${PATH_TO_PROJECT_ROOT_DIRECTORY})
 
 if(CMAKE_GENERATOR MATCHES "Visual Studio")
-    set_property(TARGET cpp-xplatform-external-tests PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:cpp-xplatform-external-tests>")
+    set_property(TARGET project-name-external-tests PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:project-name-external-tests>")
 endif()

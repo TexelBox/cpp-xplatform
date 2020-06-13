@@ -1,11 +1,11 @@
-#ifndef PREFIX_UTILS_STRING_UTILS_HPP_
-#define PREFIX_UTILS_STRING_UTILS_HPP_
+#ifndef PROJECT_NAME_UTILS_STRING_UTILS_HPP_
+#define PROJECT_NAME_UTILS_STRING_UTILS_HPP_
 
 #include <algorithm>
 #include <cctype>
 #include <locale>
 
-namespace prefix::utils {
+namespace project_name::utils {
     // reference: https://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
 
     // trim front (in-place)
@@ -47,4 +47,4 @@ namespace prefix::utils {
     }
 }
 
-#endif // PREFIX_UTILS_STRING_UTILS_HPP_
+#endif // PROJECT_NAME_UTILS_STRING_UTILS_HPP_

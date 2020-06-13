@@ -1,5 +1,5 @@
-#ifndef PREFIX_COMMON_TEST_H_
-#define PREFIX_COMMON_TEST_H_
+#ifndef PROJECT_NAME_COMMON_TEST_H_
+#define PROJECT_NAME_COMMON_TEST_H_
 
 /// COMMON HEADER OF EXTERNAL-TESTS EXECUTABLE
 /// - #include "common.test.h" should be the first include directive inside all external-test implementation (e.g. .test.cpp) files
@@ -21,4 +21,4 @@
 
 #include <doctest/doctest.h>
 
-#endif // PREFIX_COMMON_TEST_H_
+#endif // PROJECT_NAME_COMMON_TEST_H_

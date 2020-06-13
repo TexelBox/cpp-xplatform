@@ -31,16 +31,16 @@ do
 done
 
 echo "RUNNING DEBUG EXTERNAL TESTS..."
-./build/Debug/tests/cpp-xplatform-external-tests
+./build/Debug/tests/project-name-external-tests
 
 echo "RUNNING MINSIZEREL EXTERNAL TESTS..."
-./build/MinSizeRel/tests/cpp-xplatform-external-tests
+./build/MinSizeRel/tests/project-name-external-tests
 
 echo "RUNNING RELEASE EXTERNAL TESTS..."
-./build/Release/tests/cpp-xplatform-external-tests
+./build/Release/tests/project-name-external-tests
 
 echo "RUNNING RELWITHDEBINFO EXTERNAL TESTS..."
-./build/RelWithDebInfo/tests/cpp-xplatform-external-tests
+./build/RelWithDebInfo/tests/project-name-external-tests
 
 # reference: https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
 # reference: https://unix.stackexchange.com/questions/53036/read-a-single-key-gives-an-error

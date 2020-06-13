@@ -14,7 +14,7 @@ endif()
 # https://cmake.org/cmake/help/latest/command/project.html
 # note: including 'C' as a language is necessary to prevent some "CMAKE MISSING INTERNAL VARIABLES ERRORS" that can occur (has happened on Linux before)
 # reference: https://github.com/google/iree/issues/229
-project(cpp-xplatform LANGUAGES CXX C)
+project(project-name LANGUAGES CXX C)
 
 # reference: https://cmake.org/cmake/help/v3.16/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html
 # generates a 'compile_commands.json' for each config that contains compile information for all translation units
@@ -97,20 +97,20 @@ endif()
 # 4. in both ways, you have to do something manually, and I feel a "touch" is easier than writing a bunch of filenames here in this script
 # 5. globbing could result in false positives, but these could be rare and can be fixed with REMOVE_ITEM or partial manual listing
 # note: apparently cmake 3.12 added a CONFIGURE_DEPENDS option that reruns cmake when glob value changes, but this seems like it could be problematic with different generators and could slow down the build pipeline a bit
-file(GLOB_RECURSE PREFIX_SOURCE_FILES_IN_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c++" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hh" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h++")
-list(REMOVE_ITEM PREFIX_SOURCE_FILES_IN_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.cpp")
-file(GLOB_RECURSE PREFIX_SOURCE_FILES_IN_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.c" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.cxx" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.c++" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.hh" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/cpp-xplatform/*.h++")
+file(GLOB_RECURSE PROJECT_NAME_SOURCE_FILES_IN_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cxx" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c++" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hh" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h++")
+list(REMOVE_ITEM PROJECT_NAME_SOURCE_FILES_IN_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.cpp")
+file(GLOB_RECURSE PROJECT_NAME_SOURCE_FILES_IN_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.c" "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.cc" "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.cxx" "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.c++" "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.h" "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.hh" "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.hpp" "${CMAKE_CURRENT_SOURCE_DIR}/include/project-name/*.h++")
 # note: according to cotire manual, the pch.cpp file must be the first listed source file for out target
 # reference: https://github.com/sakra/cotire/blob/master/MANUAL.md#using-a-manually-maintained-prefix-header-instead-of-the-automatically-generated-one
 # note: you will also have to add paths to any dependency sources only when they are required to be built directly with your files
-list(APPEND PREFIX_ALL_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.cpp" ${PREFIX_SOURCE_FILES_IN_SRC_DIR} ${PREFIX_SOURCE_FILES_IN_INCLUDE_DIR})
-message(STATUS "main target source files = ${PREFIX_ALL_SOURCE_FILES}")
-# adds an executable target called <cpp-xplatform> to be built from the source files listed
+list(APPEND PROJECT_NAME_ALL_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.cpp" ${PROJECT_NAME_SOURCE_FILES_IN_SRC_DIR} ${PROJECT_NAME_SOURCE_FILES_IN_INCLUDE_DIR})
+message(STATUS "main target source files = ${PROJECT_NAME_ALL_SOURCE_FILES}")
+# adds an executable target called <project-name> to be built from the source files listed
 # the source files can be removed from here and specified later using target_sources()
 # https://cmake.org/cmake/help/latest/command/add_executable.html
 # warning: use CMAKE_CURRENT_SOURCE_DIR rather than CMAKE_SOURCE_DIR since the the latter points to the src directory of the parent project. So, if my project is a sub-project of another then mine won't build
 # https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/issues/1428
-add_executable(cpp-xplatform ${PREFIX_ALL_SOURCE_FILES})
+add_executable(project-name ${PROJECT_NAME_ALL_SOURCE_FILES})
 
 # reference: https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/
 # SCOPE SPECIFIERS...
@@ -121,7 +121,7 @@ add_executable(cpp-xplatform ${PREFIX_ALL_SOURCE_FILES})
 # and src/ is PRIVATE since only private headers reside here and are only needed for internal building
 # note: it seems like include paths must be absolute, except for INSTALL_INTERFACE which allows relative paths (also BUILD_INTERFACE paths can't be quoted without error (for a reason unknown to me))
 # reference: https://cmake.org/cmake/help/v3.2/prop_tgt/INTERFACE_INCLUDE_DIRECTORIES.html
-target_include_directories(cpp-xplatform
+target_include_directories(project-name
     PUBLIC
         $<INSTALL_INTERFACE:include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -164,7 +164,7 @@ message(STATUS "setting macros for paths...\n
 # reference: https://github.com/onqtam/doctest/issues/126
 # TODO: the above link might suggest that other definitions are needed (to fix other linker errors) like DOCTEST_CONFIG_ASSERTION_PARAMETERS_BY_VALUE, but I will only add those if needed frequently or for good reason
 # reference: https://github.com/onqtam/doctest/issues/183
-target_compile_definitions(cpp-xplatform PRIVATE DOCTEST_CONFIG_NO_SHORT_MACRO_NAMES DOCTEST_CONFIG_USE_STD_HEADERS PATH_TO_ASSETS_DIRECTORY=${PATH_TO_ASSETS_DIRECTORY} PATH_TO_BUILD_SYSTEM_DIRECTORY=${PATH_TO_BUILD_SYSTEM_DIRECTORY} PATH_TO_PROJECT_ROOT_DIRECTORY=${PATH_TO_PROJECT_ROOT_DIRECTORY})
+target_compile_definitions(project-name PRIVATE DOCTEST_CONFIG_NO_SHORT_MACRO_NAMES DOCTEST_CONFIG_USE_STD_HEADERS PATH_TO_ASSETS_DIRECTORY=${PATH_TO_ASSETS_DIRECTORY} PATH_TO_BUILD_SYSTEM_DIRECTORY=${PATH_TO_BUILD_SYSTEM_DIRECTORY} PATH_TO_PROJECT_ROOT_DIRECTORY=${PATH_TO_PROJECT_ROOT_DIRECTORY})
 
 # https://foonathan.net/blog/2018/10/17/cmake-warnings.html
 # set the warning flags for the respective compilers using cmake generator expressions
@@ -174,7 +174,7 @@ target_compile_definitions(cpp-xplatform PRIVATE DOCTEST_CONFIG_NO_SHORT_MACRO_N
 # note: if additional warning flags are to be added, I believe the project would have to be clean-rebuilt to apply the new warning detection to previously compiled files
 # note: for some reason, the cmakecache file doesn't reflect these changes (e.g. still says default of /W3), but they seem to still apply correctly
 # DEPRECATED (cotire doesn't work well will some generator expressions, like the ones below...)
-#target_compile_options(cpp-xplatform PRIVATE
+#target_compile_options(project-name PRIVATE
 #    $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>,$<CXX_COMPILER_ID:GNU>>:
 #        -Wall -Wextra>
 #        # opt. could add -Werror (if your libs don't throw so many warnings or you have good warning policy handling)
@@ -185,43 +185,43 @@ target_compile_definitions(cpp-xplatform PRIVATE DOCTEST_CONFIG_NO_SHORT_MACRO_N
 
 # reference: https://stackoverflow.com/questions/10046114/in-cmake-how-can-i-test-if-the-compiler-is-clang
 if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    target_compile_options(cpp-xplatform PRIVATE -Wall -Wextra)
+    target_compile_options(project-name PRIVATE -Wall -Wextra)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     # reference: https://devblogs.microsoft.com/cppblog/recommendations-to-speed-c-builds-in-visual-studio/
     # reference: https://docs.microsoft.com/en-us/cpp/build/reference/mp-build-with-multiple-processes?view=vs-2019
     # /MP is used for parallel compilation (automatically figures out number of effective processors on your system)
     # note: /MP is incompatible with some compilation options, but they seem to have lesser value
-    target_compile_options(cpp-xplatform PRIVATE /MP /W4)
+    target_compile_options(project-name PRIVATE /MP /W4)
 endif()
 
 # reference: https://stackoverflow.com/questions/26836361/check-if-generating-a-visual-studio-solution-or-makefile-from-cmake
 if(CMAKE_GENERATOR MATCHES "Visual Studio")
     # reference: https://stackoverflow.com/questions/7304625/how-do-i-change-the-startup-project-of-a-visual-studio-solution-via-cmake
     # sets the startup project in the Visual Studio solution (so that user doesn't have to explicitly right click target and set option)
-    set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT cpp-xplatform)
+    set_property(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}" PROPERTY VS_STARTUP_PROJECT project-name)
 
     # reference: https://stackoverflow.com/questions/23950887/does-cmake-offer-a-method-to-set-the-working-directory-for-a-given-build-system
     # reference: https://stackoverflow.com/questions/55713475/correct-use-of-vs-debugger-working-directory-etc
     # sets the working directory root for all relative paths (e.g. for asset referencing) when running in Visual Studio
     # by setting this to the same directory as where the executable is built, the program can be run either directly with the .exe or in VS
-    set_property(TARGET cpp-xplatform PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:cpp-xplatform>")
+    set_property(TARGET project-name PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:project-name>")
 endif()
 
-# cotire stuff (must go below target (cpp-xplatform) configuration above)
+# cotire stuff (must go below target (project-name) configuration above)
 # disable automatic UNITY (JUMBO) builds
-set_target_properties(cpp-xplatform PROPERTIES COTIRE_ADD_UNITY_BUILD FALSE)
+set_target_properties(project-name PROPERTIES COTIRE_ADD_UNITY_BUILD FALSE)
 # enable manual prefix header that we must maintain, rather than the automatic one generated by cotire
-set_target_properties(cpp-xplatform PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h")
-# must call this after setting all target properties of cpp-xplatform
+set_target_properties(project-name PROPERTIES COTIRE_CXX_PROJECT_NAME_HEADER_INIT "${CMAKE_CURRENT_SOURCE_DIR}/src/pch.h")
+# must call this after setting all target properties of project-name
 # apply cotire function on our target
-cotire(cpp-xplatform)
+cotire(project-name)
 
-if(NOT DEFINED PREFIX_BUILD_EXTERNAL_TESTS)
-    message(STATUS "(default) - setting PREFIX_BUILD_EXTERNAL_TESTS=OFF")
-    set(PREFIX_BUILD_EXTERNAL_TESTS OFF)
+if(NOT DEFINED PROJECT_NAME_BUILD_EXTERNAL_TESTS)
+    message(STATUS "(default) - setting PROJECT_NAME_BUILD_EXTERNAL_TESTS=OFF")
+    set(PROJECT_NAME_BUILD_EXTERNAL_TESTS OFF)
 endif()
 
-if(PREFIX_BUILD_EXTERNAL_TESTS)
+if(PROJECT_NAME_BUILD_EXTERNAL_TESTS)
     message(STATUS "Building external tests...")
     add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests")
 endif()

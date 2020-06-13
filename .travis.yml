@@ -62,7 +62,7 @@ script:
   - echo ====================================================== || travis_terminate 1
   # DEBUG config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file Debug/cpp-xplatform || travis_terminate 1
+  - file Debug/project-name || travis_terminate 1
   # print out these 3 files (useful info)
   - cat Debug/compile_commands.json || travis_terminate 1
   - cat Debug/Makefile || travis_terminate 1
@@ -71,7 +71,7 @@ script:
   - echo ====================================================== || travis_terminate 1
   # MINSIZEREL config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file MinSizeRel/cpp-xplatform || travis_terminate 1
+  - file MinSizeRel/project-name || travis_terminate 1
   # print out these 3 files (useful info)
   - cat MinSizeRel/compile_commands.json || travis_terminate 1
   - cat MinSizeRel/Makefile || travis_terminate 1
@@ -80,7 +80,7 @@ script:
   - echo ====================================================== || travis_terminate 1
   # RELEASE config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file Release/cpp-xplatform || travis_terminate 1
+  - file Release/project-name || travis_terminate 1
   # print out these 3 files (useful info)
   - cat Release/compile_commands.json || travis_terminate 1
   - cat Release/Makefile || travis_terminate 1
@@ -89,7 +89,7 @@ script:
   - echo ====================================================== || travis_terminate 1
   # RELWITHDEBINFO config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file RelWithDebInfo/cpp-xplatform || travis_terminate 1
+  - file RelWithDebInfo/project-name || travis_terminate 1
   # print out these 3 files (useful info)
   - cat RelWithDebInfo/compile_commands.json || travis_terminate 1
   - cat RelWithDebInfo/Makefile || travis_terminate 1

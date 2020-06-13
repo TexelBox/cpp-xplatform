@@ -247,35 +247,35 @@ chmod +x dev-build-all.sh
 ### Running
 #### For Users...
 ##### Windows
-- For best performance, double-click/run `cpp-xplatform.exe` in either x86/Release (32-bit) or x64/Release (64-bit).
+- For best performance, double-click/run `project-name.exe` in either x86/Release (32-bit) or x64/Release (64-bit).
 ##### Linux/macOS
-- For best performance, double-click/run `cpp-xplatform` in build/Release.
+- For best performance, double-click/run `project-name` in build/Release.
 
 #### For Developers...
 ##### Windows
-- If using `VS 2017`, open either x86/cpp-xplatform.sln or x64/cpp-xplatform.sln and click the green arrow (you can also change the build config with the drop-down - use Debug when you need the debugger and Release when testing for performance).
+- If using `VS 2017`, open either x86/project-name.sln or x64/project-name.sln and click the green arrow (you can also change the build config with the drop-down - use Debug when you need the debugger and Release when testing for performance).
 ##### Linux/macOS
 ```
 make -j$(($(nproc)+1))
-./cpp-xplatform
+./project-name
 ```
 ##### Usage
-- Only run program: `./cpp-xplatform`
-- Run program and internal tests: `./cpp-xplatform --dt-no-run=false`
-- Only run internal tests: `./cpp-xplatform --dt-exit=true --dt-no-run=false`
+- Only run program: `./project-name`
+- Run program and internal tests: `./project-name --dt-no-run=false`
+- Only run internal tests: `./project-name --dt-exit=true --dt-no-run=false`
 - **TODO: ONCE VERSIONING IS IMPLEMENTED, ADD A --version HERE**
 
 ##### Test-Running
 - Internal Tests:
   - Single config:
-    - `./cpp-xplatform --dt-exit=true --dt-no-run=false`
+    - `./project-name --dt-exit=true --dt-no-run=false`
   - All configs:
     - `./run-internal-tests.bat` (Windows)
     - `./run-internal-tests.sh` (Linux/macOS)
 - External Tests:
   - Single config:
-    - `./cpp-xplatform-external-tests`
-    - or, set the `StartUp Project` to `cpp-xplatform-external-tests` and run directly in the IDE as usual (Visual Studio only)
+    - `./project-name-external-tests`
+    - or, set the `StartUp Project` to `project-name-external-tests` and run directly in the IDE as usual (Visual Studio only)
   - All configs:
     - `./run-external-tests.bat` (Windows)
     - `./run-external-tests.sh` (Linux/macOS)

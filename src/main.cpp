@@ -19,8 +19,8 @@
 #include <doctest/doctest.h>
 
 // forward declarations...
-//NOTE: apparently this is the proper way to forward declare namespaced-functions (you can't do "int prefix::program(int argc, char *argv[]);")
-namespace prefix {
+//NOTE: apparently this is the proper way to forward declare namespaced-functions (you can't do "int project_name::program(int argc, char *argv[]);")
+namespace project_name {
     int program(int argc, char *argv[]);
 }
 
@@ -37,9 +37,9 @@ DOCTEST_TEST_CASE("internal-test-asset-finding") {
 // reference: https://github.com/onqtam/doctest/blob/master/doc/markdown/commandline.md
 // reference: https://blog.jetbrains.com/rscpp/better-ways-testing-with-doctest/
 // reference: https://github.com/onqtam/doctest/issues/20
-// USAGE#1: ./cpp-xplatform (runs just the user-defined program)
-// USAGE#2: ./cpp-xplatform --dt-no-run=false (runs internal tests and then runs user-defined program)
-// USAGE#3: ./cpp-xplatform --dt-exit=true --dt-no-run=false (runs just the internal tests)
+// USAGE#1: ./project-name (runs just the user-defined program)
+// USAGE#2: ./project-name --dt-no-run=false (runs internal tests and then runs user-defined program)
+// USAGE#3: ./project-name --dt-exit=true --dt-no-run=false (runs just the internal tests)
 // reminder: argv[0] usually contains the executable name, argv[argc] is always a null pointer
 int main(int argc, char *argv[]) {
     doctest::Context ctx;
@@ -59,11 +59,11 @@ int main(int argc, char *argv[]) {
     if (ctx.shouldExit()) return testingResult;
 
     // run user-defined program...
-    int const programResult{prefix::program(argc, argv)};
+    int const programResult{project_name::program(argc, argv)};
     return testingResult + programResult;
 }
 
-namespace prefix {
+namespace project_name {
     // forward declarations...
     std::vector<std::string> getProgramArgs(int const argc, char const*const argv[]);
 
@@ -75,7 +75,7 @@ namespace prefix {
         // now, do something specific to your program with args...
 
         // execute the rest of your program...
-        std::cout << prefix::utils::trim_copy(" Hello World! ") << std::endl;
+        std::cout << project_name::utils::trim_copy(" Hello World! ") << std::endl;
         std::cout << "Enter any non-empty string to exit . . . " << std::endl;
         std::string dummy;
         std::cin >> dummy;

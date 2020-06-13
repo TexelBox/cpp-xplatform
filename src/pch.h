@@ -1,5 +1,5 @@
-#ifndef PREFIX_PCH_H_
-#define PREFIX_PCH_H_
+#ifndef PROJECT_NAME_PCH_H_
+#define PROJECT_NAME_PCH_H_
 
 /// COMMON HEADER OF MAIN EXECUTABLE / LIBRARY
 /// - reference: https://stackoverflow.com/questions/54121917/what-is-pch-h-and-why-is-it-needed-to-be-included-as-the-first-header-file
@@ -28,6 +28,6 @@
 
 #include <doctest/doctest.h>
 
-#include <cpp-xplatform/utils/string-utils.hpp>
+#include <project-name/utils/string-utils.hpp>
 
-#endif // PREFIX_PCH_H_
+#endif // PROJECT_NAME_PCH_H_

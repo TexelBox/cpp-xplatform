@@ -31,6 +31,6 @@ DOCTEST_TEST_CASE("external-test-asset-finding") {
     DOCTEST_CHECK(ifs);
 }
 
-namespace prefix {
+namespace project_name {
 
 }

@@ -31,16 +31,16 @@ do
 done
 
 echo "RUNNING DEBUG INTERNAL TESTS..."
-./build/Debug/cpp-xplatform --dt-exit=true --dt-no-run=false
+./build/Debug/project-name --dt-exit=true --dt-no-run=false
 
 echo "RUNNING MINSIZEREL INTERNAL TESTS..."
-./build/MinSizeRel/cpp-xplatform --dt-exit=true --dt-no-run=false
+./build/MinSizeRel/project-name --dt-exit=true --dt-no-run=false
 
 echo "RUNNING RELEASE INTERNAL TESTS..."
-./build/Release/cpp-xplatform --dt-exit=true --dt-no-run=false
+./build/Release/project-name --dt-exit=true --dt-no-run=false
 
 echo "RUNNING RELWITHDEBINFO INTERNAL TESTS..."
-./build/RelWithDebInfo/cpp-xplatform --dt-exit=true --dt-no-run=false
+./build/RelWithDebInfo/project-name --dt-exit=true --dt-no-run=false
 
 # reference: https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
 # reference: https://unix.stackexchange.com/questions/53036/read-a-single-key-gives-an-error

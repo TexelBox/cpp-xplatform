@@ -29,7 +29,7 @@ build_script:
   - echo ======================================================
   - echo ======================================================
   # type <filename> prints out the file contents (similar to UNIX cat)
-  - type cpp-xplatform.vcxproj
+  - type project-name.vcxproj
   - type CMakeCache.txt
   - echo ======================================================
   - echo ======================================================
@@ -37,7 +37,7 @@ build_script:
   - tree /F /A
   - echo ======================================================
   - echo ======================================================
-  - type cpp-xplatform.vcxproj
+  - type project-name.vcxproj
   - type CMakeCache.txt
 # run custom tests...
 test_script:
