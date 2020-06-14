@@ -16,6 +16,10 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
+# Git...
+# ignore backup files that get created by merge tool
+*.orig
+
 # Perl...
 # ignore backup files that get created by Perl search-and-replace
 *.bak
