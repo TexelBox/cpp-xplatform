@@ -28,6 +28,7 @@ matrix:
 git:
   submodules: false
 before_install:
+  - cd "${TRAVIS_BUILD_DIR}"
   - git submodule update --init --recursive
 script:
   # reference: https://github.com/travis-ci/travis-ci/issues/1066
@@ -40,6 +41,7 @@ script:
   # reference: https://medium.com/@manjula.cse/how-to-stop-the-execution-of-travis-pipeline-if-script-exits-with-an-error-f0e5a43206bf
   # 'travis_terminate 1' hopefully is the best solution to fast-fail at the moment (but it seems like it may prevent after_script/after_failure blocks from running)
   # note: the best solution would probably be to move this script into a shell script and just execute that
+  - cd "${TRAVIS_BUILD_DIR}" || travis_terminate 1
   - cmake --version || travis_terminate 1
   - cd scripts || travis_terminate 1
   # print out file permissions to make sure shell scripts are executable (x-flag)
