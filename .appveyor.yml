@@ -4,14 +4,13 @@ image:
   - Visual Studio 2017
 build:
   verbosity: minimal
-clone_folder: C:\projects\cpp-xplatform
 # reference: https://github.com/appveyor/ci/issues/899
 install:
   - cd %APPVEYOR_BUILD_FOLDER%
   - git submodule update --init --recursive
 # run a custom build through a script rather than MSBuild directly
 build_script:
-  - cd C:\projects\cpp-xplatform
+  - cd %APPVEYOR_BUILD_FOLDER%
   - cmake --version
   - cd scripts
   # note: I used to feed 'nul' into the batch file (dev-build-all.bat < nul) to cause it to exit once it hits the pause at its end to prevent appveyor from hanging for an hour, since no key could be pressed to terminate (as linked below), but this only works if run in Command Prompt
@@ -41,6 +40,6 @@ build_script:
   - type CMakeCache.txt
 # run custom tests...
 test_script:
-  - cd C:\projects\cpp-xplatform\scripts
+  - cd %APPVEYOR_BUILD_FOLDER%\scripts
   - run-internal-tests.bat --no-pause
   - run-external-tests.bat --no-pause
