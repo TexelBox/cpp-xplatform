@@ -42,6 +42,7 @@ script:
   # 'travis_terminate 1' hopefully is the best solution to fast-fail at the moment (but it seems like it may prevent after_script/after_failure blocks from running)
   # note: the best solution would probably be to move this script into a shell script and just execute that
   - cd "${TRAVIS_BUILD_DIR}" || travis_terminate 1
+  - git --version || travis_terminate 1
   - cmake --version || travis_terminate 1
   - cd scripts || travis_terminate 1
   # print out file permissions to make sure shell scripts are executable (x-flag)

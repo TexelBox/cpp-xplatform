@@ -11,6 +11,7 @@ install:
 # run a custom build through a script rather than MSBuild directly
 build_script:
   - cd %APPVEYOR_BUILD_FOLDER%
+  - git --version
   - cmake --version
   - cd scripts
   # note: I used to feed 'nul' into the batch file (dev-build-all.bat < nul) to cause it to exit once it hits the pause at its end to prevent appveyor from hanging for an hour, since no key could be pressed to terminate (as linked below), but this only works if run in Command Prompt
