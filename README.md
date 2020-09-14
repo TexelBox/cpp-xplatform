@@ -194,7 +194,9 @@ The design allows for clear and easy building for both developers and users. It 
 - Clang (libc++) 6
 - MSVC (MSVC Standard Library) 19.14 (VS 2017 15.7)
 - Apple Clang 10.0.0
-###### [Refer here for a comprehensive overview of which C++ standard features are supported by each compiler.](https://en.cppreference.com/w/cpp/compiler_support)
+
+[Refer here for a comprehensive overview of which C++ standard features are supported by each compiler.](https://en.cppreference.com/w/cpp/compiler_support)
+
 **NOTE: all C++17 core language features are supported by these compilers, but some library features are unsupported.**
 
 ---
