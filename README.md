@@ -4,9 +4,9 @@ C++17 cross-platform template repository using CMake + Git Submodules.
 ---
 
 ### Project Status/Info
-[**AppVeyor project page**](https://ci.appveyor.com/project/TexelBox/cpp-xplatform)
+**[AppVeyor project page](https://ci.appveyor.com/project/TexelBox/cpp-xplatform)**
 
-[**Travis CI project page**](https://travis-ci.org/TexelBox/cpp-xplatform)
+**[Travis CI project page](https://travis-ci.org/TexelBox/cpp-xplatform)**
 
 <table>
     <tr>
@@ -36,26 +36,26 @@ C++17 cross-platform template repository using CMake + Git Submodules.
 ---
 
 ### Index
-- [**Preamble**](#preamble)
-- [**Contributing**](#contributing)
-- [**Summary**](#summary)
-- [**Features**](#features)
-- [**Requirements**](#requirements)
-  - [**Tools**](#tools)
-  - [**Supported Compilers**](#supported-compilers)
-- [**Cloning**](#cloning)
-- [**Building**](#building)
-- [**Running**](#running)
-  - [**Usage**](#usage)
-  - [**Test-Running**](#test-running)
-- [**Dependencies**](#dependencies)
+- **[Preamble](#preamble)**
+- **[Contributing](#contributing)**
+- **[Summary](#summary)**
+- **[Features](#features)**
+- **[Requirements](#requirements)**
+  - **[Tools](#tools)**
+  - **[Supported Compilers](#supported-compilers)**
+- **[Cloning](#cloning)**
+- **[Building](#building)**
+- **[Running](#running)**
+  - **[Usage](#usage)**
+  - **[Test-Running](#test-running)**
+- **[Dependencies](#dependencies)**
 
 ---
 
 ### Preamble
 If you find this repository to be useful, you may show support by starring the repository or contacting me more directly (contact info may be found via my GitHub profile). Please feel free to share any projects you create. I would love to see them, especially if they are other template repositories! Any comments, questions, feedback, or criticisms are welcome as long as they are communicated in a constructive and respectful manner.
 
-[**General Discussion Board**](https://github.com/TexelBox/cpp-xplatform/issues/9)
+**[General Discussion Board](https://github.com/TexelBox/cpp-xplatform/issues/9)**
 
 ### Contributing
 If you identify any bugs or wish to request a feature, please submit an issue on GitHub after consulting the appropriate template (help document).<br />
@@ -195,7 +195,7 @@ The design allows for clear and easy building for both developers and users. It 
 - MSVC (MSVC Standard Library) 19.14 (VS 2017 15.7)
 - Apple Clang 10.0.0
 
-[**Refer here for a comprehensive overview of which C++ standard features are supported by each compiler.**](https://en.cppreference.com/w/cpp/compiler_support)
+**[Refer here for a comprehensive overview of which C++ standard features are supported by each compiler.](https://en.cppreference.com/w/cpp/compiler_support)**
 
 **NOTE: all C++17 core language features are supported by these compilers, but some library features are unsupported.**
 
@@ -285,8 +285,8 @@ make -j$(($(nproc)+1))
 
 ### Dependencies
 Many thanks to the contributors of the following projects! Please check them out!
-- [**cotire - (CMake module to speed up builds.) - MIT licensed.**](https://github.com/sakra/cotire)
-- [**doctest - (The fastest feature-rich C++11/14/17/20 single-header testing framework for unit tests and TDD) - MIT licensed.**](https://github.com/onqtam/doctest)
+- **[cotire - (CMake module to speed up builds.) - MIT licensed.](https://github.com/sakra/cotire)**
+- **[doctest - (The fastest feature-rich C++11/14/17/20 single-header testing framework for unit tests and TDD) - MIT licensed.](https://github.com/onqtam/doctest)**
 
 ---
 
