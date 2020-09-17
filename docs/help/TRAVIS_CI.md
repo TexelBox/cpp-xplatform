@@ -6,7 +6,7 @@
 - Depending on your settings, when GitHub receives a push in a branch or through a pull request, a webhook will trigger Travis CI to build. The build will either succeed and you are good to continue working or merge the changes, or it will fail and you can inspect the errors by looking at the Travis CI build output.
 
 ### SETUP
-1. go to https://travis-ci.org/
+1. go to **https://travis-ci.org/**
 2. sign up for an account
 3. link your GitHub account
 4. enable/link your GitHub repository

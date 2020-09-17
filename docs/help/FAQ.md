@@ -1,23 +1,23 @@
 # FREQUENTLY ASKED QUESTIONS & OTHER USEFUL TIPS/REMINDERS
 
-- [**HOW DO I ADD A NEW GIT SUBMODULE?**](#how-do-i-add-a-new-git-submodule)
-- [**HOW DO I ADD TESTS?**](#how-do-i-add-tests)
-- [**HOW DO I GET CMAKE TO RECOGNIZE AN ADDED/RENAMED/DELETED FILE?**](#how-do-i-get-cmake-to-recognize-an-addedrenameddeleted-file)
-- [**HOW DO I INITIALIZE/UPDATE ALL GIT SUBMODULES RECURSIVELY?**](#how-do-i-initializeupdate-all-git-submodules-recursively)
-- [**HOW DO I SKIP CONTINUOUS INTEGRATION ON THE NEXT COMMIT?**](#how-do-i-skip-continuous-integration-on-the-next-commit)
-- [**HOW DO I STAGE A NEW SHELL SCRIPT WITH EXECUTABLE PERMISSION?**](#how-do-i-stage-a-new-shell-script-with-executable-permission)
-- [**HOW DO I UPGRADE GIT SUBMODULES TO THEIR LATEST COMMITS?**](#how-do-i-upgrade-git-submodules-to-their-latest-commits)
-- [**HOW DO I VIEW THE ENTIRE PROJECT DIRECTORY STRUCTURE IN VISUAL STUDIO?**](#how-do-i-view-the-entire-project-directory-structure-in-visual-studio)
-- [**I JUST ADDED A NEW GIT SUBMODULE THAT USES GIT SUBMODULES ITSELF. WHY ARE THEY MISSING AND HOW DO I FIX THIS?**](#i-just-added-a-new-git-submodule-that-uses-git-submodules-itself-why-are-they-missing-and-how-do-i-fix-this)
-- [**SOURCE CODE FILE TEMPLATE (PRIVATE)**](#source-code-file-template-private)
-- [**WHAT ARE pch.h AND pch.cpp / WHAT ARE PRECOMPILED HEADERS (PCH)?**](#what-are-pchh-and-pchcpp--what-are-precompiled-headers-pch)
-- [**WHAT IS .appveyor.yml?**](#what-is-appveyoryml)
-- [**WHAT IS .editorconfig?**](#what-is-editorconfig)
-- [**WHAT IS .gitattributes?**](#what-is-gitattributes)
-- [**WHAT IS .gitignore?**](#what-is-gitignore)
-- [**WHAT IS .gitmodules?**](#what-is-gitmodules)
-- [**WHAT IS .travis.yml?**](#what-is-travisyml)
-- [**WHAT IS CMakeLists.txt?**](#what-is-cmakeliststxt)
+- **[HOW DO I ADD A NEW GIT SUBMODULE?](#how-do-i-add-a-new-git-submodule)**
+- **[HOW DO I ADD TESTS?](#how-do-i-add-tests)**
+- **[HOW DO I GET CMAKE TO RECOGNIZE AN ADDED/RENAMED/DELETED FILE?](#how-do-i-get-cmake-to-recognize-an-addedrenameddeleted-file)**
+- **[HOW DO I INITIALIZE/UPDATE ALL GIT SUBMODULES RECURSIVELY?](#how-do-i-initializeupdate-all-git-submodules-recursively)**
+- **[HOW DO I SKIP CONTINUOUS INTEGRATION ON THE NEXT COMMIT?](#how-do-i-skip-continuous-integration-on-the-next-commit)**
+- **[HOW DO I STAGE A NEW SHELL SCRIPT WITH EXECUTABLE PERMISSION?](#how-do-i-stage-a-new-shell-script-with-executable-permission)**
+- **[HOW DO I UPGRADE GIT SUBMODULES TO THEIR LATEST COMMITS?](#how-do-i-upgrade-git-submodules-to-their-latest-commits)**
+- **[HOW DO I VIEW THE ENTIRE PROJECT DIRECTORY STRUCTURE IN VISUAL STUDIO?](#how-do-i-view-the-entire-project-directory-structure-in-visual-studio)**
+- **[I JUST ADDED A NEW GIT SUBMODULE THAT USES GIT SUBMODULES ITSELF. WHY ARE THEY MISSING AND HOW DO I FIX THIS?](#i-just-added-a-new-git-submodule-that-uses-git-submodules-itself-why-are-they-missing-and-how-do-i-fix-this)**
+- **[SOURCE CODE FILE TEMPLATE (PRIVATE)](#source-code-file-template-private)**
+- **[WHAT ARE pch.h AND pch.cpp / WHAT ARE PRECOMPILED HEADERS (PCH)?](#what-are-pchh-and-pchcpp--what-are-precompiled-headers-pch)**
+- **[WHAT IS .appveyor.yml?](#what-is-appveyoryml)**
+- **[WHAT IS .editorconfig?](#what-is-editorconfig)**
+- **[WHAT IS .gitattributes?](#what-is-gitattributes)**
+- **[WHAT IS .gitignore?](#what-is-gitignore)**
+- **[WHAT IS .gitmodules?](#what-is-gitmodules)**
+- **[WHAT IS .travis.yml?](#what-is-travisyml)**
+- **[WHAT IS CMakeLists.txt?](#what-is-cmakeliststxt)**
 
 ---
 
@@ -183,16 +183,16 @@ namespace project_name::n0 {
 **NOTE: they should only be used in private source code in src/. Otherwise (publicly), either you would be exposing many unnecessary includes or the user would be missing includes due to them not having force-include of the precompiled header.**
 
 #### WHAT IS .appveyor.yml?
-[Read this](APPVEYOR.md)
+**[Read this](APPVEYOR.md)**
 #### WHAT IS .editorconfig?
-[Read this](EDITORCONFIG.md)
+**[Read this](EDITORCONFIG.md)**
 #### WHAT IS .gitattributes?
-[Read this](GIT_ATTRIBUTES.md)
+**[Read this](GIT_ATTRIBUTES.md)**
 #### WHAT IS .gitignore?
-[Read this](GIT_IGNORE.md)
+**[Read this](GIT_IGNORE.md)**
 #### WHAT IS .gitmodules?
-[Read this](GIT_MODULES.md)
+**[Read this](GIT_MODULES.md)**
 #### WHAT IS .travis.yml?
-[Read this](TRAVIS_CI.md)
+**[Read this](TRAVIS_CI.md)**
 #### WHAT IS CMakeLists.txt?
-[Read this](CMAKE.md)
+**[Read this](CMAKE.md)**

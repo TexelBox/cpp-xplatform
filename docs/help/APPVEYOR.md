@@ -6,7 +6,7 @@
 - Depending on your settings, when GitHub receives a push in a branch or through a pull request, a webhook will trigger AppVeyor to build. The build will either succeed and you are good to continue working or merge the changes, or it will fail and you can inspect the errors by looking at the AppVeyor build output.
 
 ### SETUP
-1. go to https://www.appveyor.com/
+1. go to **https://www.appveyor.com/**
 2. sign up for an account
 3. link your GitHub account
 4. create a new AppVeyor project and link your GitHub repository
