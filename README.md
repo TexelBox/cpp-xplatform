@@ -77,7 +77,7 @@ The design allows for clear and easy building for both developers and users. It 
 
 **NOTE: I encourage anyone to try building other template repositories that extend this one with a set of specific dependencies. For example, once I add some more features to this repository, I will be extending it by building an OpenGL template repository (most of the work is already done for this). Although not required, I think it would be beneficial for derivative template repositories to link back to this one in their README to encourage more derivatives.**
 
-**NOTE: alongside reading this README, it is strongly suggested to also read the short documentation files inside `docs/help/` (starting with the [FAQ](docs/help/FAQ.md)).**
+**NOTE: alongside reading this README, it is strongly suggested to also read the short documentation files located in the [help](https://github.com/TexelBox/help) repo.**
 
 ---
 
@@ -99,7 +99,6 @@ The design allows for clear and easy building for both developers and users. It 
 - [x] Decently strict compiler warning options
 - [x] Integrated lightweight/fast testing framework (with classical "external" testing and inline "internal" testing) (via `doctest`)
 - [x] Continuous integration (CI) for cross-platform build-testing and test-running (`AppVeyor` (Windows), `Travis CI` (Linux/macOS)
-- [x] Collection of help documents (FAQ, tips/reminders)
 - [x] Developer-friendly (permissive) CC0-1.0 license
 
 **NOTE: more specific features may be discovered by reading through specific files such as the CMake scripts.**
