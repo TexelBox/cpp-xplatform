@@ -86,7 +86,7 @@ namespace project_name {
     // removes the doctest options and returns only relevant cmd-line args for user-defined program usage
     std::vector<std::string> getProgramArgs(int const argc, char const*const argv[]) {
         std::vector<std::string> args;
-        for (unsigned int i{0}; i < argc; ++i) {
+        for (int i{0}; i < argc; ++i) {
             std::string const arg{argv[i]};
             std::string const prefix{arg.substr(0, 5)};
             if ("--dt-" != prefix) args.push_back(arg);
