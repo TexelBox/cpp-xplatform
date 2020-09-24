@@ -6,7 +6,7 @@ C++17 cross-platform template repository using CMake + Git Submodules.
 ### Project Status/Info
 **[AppVeyor project page](https://ci.appveyor.com/project/TexelBox/cpp-xplatform)**
 
-**[Travis CI project page](https://travis-ci.org/TexelBox/cpp-xplatform)**
+**[Travis CI project page](https://travis-ci.com/github/TexelBox/cpp-xplatform)**
 
 <table>
     <tr>
@@ -17,7 +17,7 @@ C++17 cross-platform template repository using CMake + Git Submodules.
             Windows <a href="https://ci.appveyor.com/project/TexelBox/cpp-xplatform/branch/master" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/9q38si39i32fd8d9/branch/master?svg=true"></a>
         </td>
         <td>
-            Linux/macOS <a href="https://travis-ci.org/TexelBox/cpp-xplatform/branches" target="_blank"><img src="https://travis-ci.org/TexelBox/cpp-xplatform.svg?branch=master"></a>
+            Linux/macOS <a href="https://travis-ci.com/github/TexelBox/cpp-xplatform/branches" target="_blank"><img src="https://travis-ci.com/TexelBox/cpp-xplatform.svg?branch=master"></a>
         </td>
     </tr>
     <tr>
@@ -28,7 +28,7 @@ C++17 cross-platform template repository using CMake + Git Submodules.
             Windows <a href="https://ci.appveyor.com/project/TexelBox/cpp-xplatform/branch/dev" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/9q38si39i32fd8d9/branch/dev?svg=true"></a>
         </td>
         <td>
-            Linux/macOS <a href="https://travis-ci.org/TexelBox/cpp-xplatform/branches" target="_blank"><img src="https://travis-ci.org/TexelBox/cpp-xplatform.svg?branch=dev"></a>
+            Linux/macOS <a href="https://travis-ci.com/github/TexelBox/cpp-xplatform/branches" target="_blank"><img src="https://travis-ci.com/TexelBox/cpp-xplatform.svg?branch=dev"></a>
         </td>
     </tr>
 </table>
