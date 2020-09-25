@@ -23,7 +23,8 @@ jobs:
     name: CI
 
     # virtual runner environments
-    runs-on: windows-latest
+    # note: 'windows-2016' is required at the moment to get VS 2017, but this should be changed back to 'windows-latest' if VS 2017 ever gets added there
+    runs-on: windows-2016
 
     # sequential steps of this job...
     steps:
