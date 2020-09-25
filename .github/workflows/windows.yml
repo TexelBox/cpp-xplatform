@@ -1,0 +1,42 @@
+# reference: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+# workflow name
+name: Windows CI
+
+# events that trigger workflow
+on: [push, pull_request]
+
+# default settings that apply to all jobs in workflow
+defaults:
+  # default settings that apply to all run steps in workflow
+  run:
+    # Git Bash
+    shell: bash
+
+# jobs run in parallel by default
+# each job runs in a fresh instance of the virtual runner environments
+# each step of a job runs in its own process in the runner environment
+jobs:
+  # unique job ID
+  ci:
+    # job name
+    name: CI
+
+    # virtual runner environments
+    runs-on: windows-latest
+
+    # sequential steps of this job...
+    steps:
+    - name: Checkout
+      # reference: https://github.com/marketplace/actions/checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Build
+      run: ./scripts/dev-build-all.bat --no-pause
+
+    - name: Test
+      run: |
+        ./scripts/run-internal-tests.bat --no-pause
+        ./scripts/run-external-tests.bat --no-pause
