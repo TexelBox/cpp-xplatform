@@ -28,6 +28,13 @@ jobs:
       fail-fast: false
       matrix:
         config:
+        # default config
+        - {
+          name: ubuntu-latest-cc-alias,
+          os: ubuntu-latest,
+          cc: cc,
+          cxx: c++
+        }
         - {
           name: ubuntu-latest-gcc,
           os: ubuntu-latest,
