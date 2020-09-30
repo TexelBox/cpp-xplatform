@@ -16,15 +16,31 @@ defaults:
 # jobs run in parallel by default
 # each job runs in a fresh instance of the virtual runner environments
 # each step of a job runs in its own process in the runner environment
+# a matrix allows creating multiple jobs with different configurations while using one job definition (same steps)
 jobs:
   # unique job ID
   ci:
     # job name
-    name: CI
-
+    name: ${{ matrix.config.name }}
     # virtual runner environments
-    # note: 'windows-2016' is required at the moment to get VS 2017, but this should be changed back to 'windows-latest' if VS 2017 ever gets added there
-    runs-on: windows-2016
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      # prevent one failing matrix job from cancelling the rest that are in-progress
+      fail-fast: false
+      matrix:
+        config:
+        # default config
+        # note: 'windows-2016' is required at the moment to get VS 2017, but this should be changed back to 'windows-latest' if VS 2017 ever gets added there
+        - {
+          name: windows-2016-cl,
+          os: windows-2016,
+          cc: cl.exe,
+          cxx: cl.exe
+        }
+    # set environment variables for all steps in this job
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
 
     # sequential steps of this job...
     steps:
