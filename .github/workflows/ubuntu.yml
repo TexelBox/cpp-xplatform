@@ -19,7 +19,7 @@ defaults:
 jobs:
   # unique job ID
   ci:
-    # skip running the job if '[ci skip]' or [skip ci] is placed in the commit message
+    # skip running the job if '[ci skip]' or '[skip ci]' is placed in the commit message
     if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
     # job name
     name: ${{ matrix.config.name }}
