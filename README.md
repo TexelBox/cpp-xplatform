@@ -4,34 +4,6 @@ C++17 cross-platform template repository using CMake + Git Submodules.
 ---
 
 ### Project Status/Info
-**[AppVeyor project page](https://ci.appveyor.com/project/TexelBox/cpp-xplatform)**
-
-**[Travis CI project page](https://travis-ci.com/github/TexelBox/cpp-xplatform)**
-
-<table>
-    <tr>
-        <td>
-            master branch
-        </td>
-        <td>
-            Windows <a href="https://ci.appveyor.com/project/TexelBox/cpp-xplatform/branch/master" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/9q38si39i32fd8d9/branch/master?svg=true"></a>
-        </td>
-        <td>
-            Linux/macOS <a href="https://travis-ci.com/github/TexelBox/cpp-xplatform/branches" target="_blank"><img src="https://travis-ci.com/TexelBox/cpp-xplatform.svg?branch=master"></a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            dev branch
-        </td>
-        <td>
-            Windows <a href="https://ci.appveyor.com/project/TexelBox/cpp-xplatform/branch/dev" target="_blank"><img src="https://ci.appveyor.com/api/projects/status/9q38si39i32fd8d9/branch/dev?svg=true"></a>
-        </td>
-        <td>
-            Linux/macOS <a href="https://travis-ci.com/github/TexelBox/cpp-xplatform/branches" target="_blank"><img src="https://travis-ci.com/TexelBox/cpp-xplatform.svg?branch=dev"></a>
-        </td>
-    </tr>
-</table>
 
 ---
 
@@ -98,7 +70,7 @@ The design allows for clear and easy building for both developers and users. It 
 - [x] Faster compilation using precompiled headers (via `cotire`) and parallel compilation (`/MP` for MSVC, and `-j` for make)
 - [x] Decently strict compiler warning options
 - [x] Integrated lightweight/fast testing framework (with classical "external" testing and inline "internal" testing) (via `doctest`)
-- [x] Continuous integration (CI) for cross-platform build-testing and test-running (`AppVeyor` (Windows), `Travis CI` (Linux/macOS)
+- [x] Continuous integration (CI) for cross-platform build-testing and test-running (`GitHub Actions`)
 - [x] Developer-friendly (permissive) CC0-1.0 license
 
 **NOTE: more specific features may be discovered by reading through specific files such as the CMake scripts.**
@@ -107,7 +79,6 @@ The design allows for clear and easy building for both developers and users. It 
 
 ### Requirements
 - A GitHub account is required if you want to take advantage of all the features, but you can still try out the project through git cloning.
-- AppVeyor / Travis CI accounts are required and must be linked to a GitHub repository if you want to take advantage of continuous integration (CI).
 - EditorConfig support/extensions in your IDE (Visual Studio 2017/2019 have it by default) or text editor are required if you (and especially your team) want to take advantage of consistent coding standards (e.g. line-endings, indentation (spaces vs. tabs, size), whitespace trimming, etc.).
 
 ### Tools
