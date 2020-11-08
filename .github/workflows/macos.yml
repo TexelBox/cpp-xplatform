@@ -1,0 +1,71 @@
+# reference: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions
+
+# workflow name
+name: macOS CI
+
+# events that trigger workflow
+on: [push, pull_request]
+
+# default settings that apply to all jobs in workflow
+defaults:
+  # default settings that apply to all run steps in workflow
+  run:
+    shell: bash
+
+# jobs run in parallel by default
+# each job runs in a fresh instance of the virtual runner environments
+# each step of a job runs in its own process in the runner environment
+# a matrix allows creating multiple jobs with different configurations while using one job definition (same steps)
+jobs:
+  # unique job ID
+  ci:
+    # skip running the job if '[ci skip]' or '[skip ci]' is placed in the commit message
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.head_commit.message, '[skip ci]')"
+    # job name
+    name: ${{ matrix.config.name }}
+    # virtual runner environments
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      # prevent one failing matrix job from cancelling the rest that are in-progress
+      fail-fast: false
+      matrix:
+        config:
+        # default config
+        - {
+          name: macos-latest-cc-alias,
+          os: macos-latest,
+          cc: cc,
+          cxx: c++
+        }
+        - {
+          name: macos-latest-gcc-alias,
+          os: macos-latest,
+          cc: gcc,
+          cxx: g++
+        }
+        - {
+          name: macos-latest-clang-alias,
+          os: macos-latest,
+          cc: clang,
+          cxx: clang++
+        }
+    # set environment variables for all steps in this job
+    env:
+      CC: ${{ matrix.config.cc }}
+      CXX: ${{ matrix.config.cxx }}
+
+    # sequential steps of this job...
+    steps:
+    - name: Checkout
+      # reference: https://github.com/marketplace/actions/checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Build
+      run: ./scripts/dev-build-all.sh --no-pause
+
+    - name: Test
+      run: |
+        ./scripts/run-internal-tests.sh --no-pause
+        ./scripts/run-external-tests.sh --no-pause
