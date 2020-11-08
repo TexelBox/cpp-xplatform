@@ -4,6 +4,10 @@ C++17 cross-platform template repository using CMake + Git Submodules.
 ---
 
 ### Project Status/Info
+|                 |                                                                                                       |                                                                                                   |                                                                                                     |
+|-----------------|-------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+|**master branch**|![Windows CI](https://github.com/TexelBox/cpp-xplatform/workflows/Windows%20CI/badge.svg?branch=master)|![macOS CI](https://github.com/TexelBox/cpp-xplatform/workflows/macOS%20CI/badge.svg?branch=master)|![Ubuntu CI](https://github.com/TexelBox/cpp-xplatform/workflows/Ubuntu%20CI/badge.svg?branch=master)|
+|**dev branch**   |![Windows CI](https://github.com/TexelBox/cpp-xplatform/workflows/Windows%20CI/badge.svg?branch=dev)   |![macOS CI](https://github.com/TexelBox/cpp-xplatform/workflows/macOS%20CI/badge.svg?branch=dev)   |![Ubuntu CI](https://github.com/TexelBox/cpp-xplatform/workflows/Ubuntu%20CI/badge.svg?branch=dev)   |
 
 ---
 
