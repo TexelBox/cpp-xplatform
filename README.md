@@ -198,23 +198,23 @@ git submodule update --init --recursive
 #### Windows
 - Double-click or use your favourite terminal to run
 ```
-dev-build-all.bat
+scripts\dev-build-all.bat
 ```
-**NOTE: you may have to run `./dev-build-all.bat` or `.\dev-build-all.bat` instead (depending on your shell).**
+**NOTE: you may have to run `./scripts/dev-build-all.bat` or `.\scripts\dev-build-all.bat` instead (depending on your shell).**
 #### Linux/macOS
 - Use your favourite terminal to run
 ```
-./dev-build-all.sh
+./scripts/dev-build-all.sh
 ```
 **NOTE: executing this way defaults to using `bash`.**
 - If for some reason the script is non-executable, then run the script through an interpreter (only `bash` and `dash` are tested, but you can try others)...
 ```
-bash dev-build-all.sh
+bash scripts/dev-build-all.sh
 ```
 - or, add executable permission and then run...
 ```
-chmod +x dev-build-all.sh
-./dev-build-all.sh
+chmod +x scripts/dev-build-all.sh
+./scripts/dev-build-all.sh
 ```
 
 ---
@@ -245,15 +245,15 @@ make -j$(($(nproc)+1))
   - Single config:
     - `./project-name --dt-exit=true --dt-no-run=false`
   - All configs:
-    - `./run-internal-tests.bat` (Windows)
-    - `./run-internal-tests.sh` (Linux/macOS)
+    - `./scripts/run-internal-tests.bat` (Windows)
+    - `./scripts/run-internal-tests.sh` (Linux/macOS)
 - External Tests:
   - Single config:
     - `./project-name-external-tests`
     - or, set the `StartUp Project` to `project-name-external-tests` and run directly in the IDE as usual (Visual Studio only)
   - All configs:
-    - `./run-external-tests.bat` (Windows)
-    - `./run-external-tests.sh` (Linux/macOS)
+    - `./scripts/run-external-tests.bat` (Windows)
+    - `./scripts/run-external-tests.sh` (Linux/macOS)
 
 ---
 
