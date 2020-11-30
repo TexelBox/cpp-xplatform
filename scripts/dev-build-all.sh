@@ -49,9 +49,9 @@ done
 # https://cmake.org/cmake/help/v3.2/manual/cmake.1.html
 
 echo "BUILDING DEBUG CONFIG..."
-mkdir -p build/Debug
-cd build/Debug
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../..
+mkdir -p build/unix-makefiles/default/Debug
+cd build/unix-makefiles/default/Debug
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../../../..
 echo "COMPILING DEBUG CONFIG..."
 # reference: https://unix.stackexchange.com/questions/208568/how-to-determine-the-maximum-number-to-pass-to-make-j-option
 # reference: https://unix.stackexchange.com/questions/519092/what-is-the-logic-of-using-nproc-1-in-make-command
@@ -60,31 +60,31 @@ echo "COMPILING DEBUG CONFIG..."
 # -j$(($(nproc)+1)) is used to run multiple make jobs in parallel (nproc returns the number of logical processing units/cores)
 # note: nproc should be installed by default on most Linux systems (part of coreutils), but macOS users will probably get an error here and should install it
 make -j$(($(nproc)+1))
-cd ../..
+cd ../../../..
 
 echo "BUILDING MINSIZEREL CONFIG..."
-mkdir -p build/MinSizeRel
-cd build/MinSizeRel
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=MinSizeRel -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../..
+mkdir -p build/unix-makefiles/default/MinSizeRel
+cd build/unix-makefiles/default/MinSizeRel
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=MinSizeRel -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../../../..
 echo "COMPILING MINSIZEREL CONFIG..."
 make -j$(($(nproc)+1))
-cd ../..
+cd ../../../..
 
 echo "BUILDING RELEASE CONFIG..."
-mkdir -p build/Release
-cd build/Release
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../..
+mkdir -p build/unix-makefiles/default/Release
+cd build/unix-makefiles/default/Release
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../../../..
 echo "COMPILING RELEASE CONFIG..."
 make -j$(($(nproc)+1))
-cd ../..
+cd ../../../..
 
 echo "BUILDING RELWITHDEBINFO CONFIG..."
-mkdir -p build/RelWithDebInfo
-cd build/RelWithDebInfo
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../..
+mkdir -p build/unix-makefiles/default/RelWithDebInfo
+cd build/unix-makefiles/default/RelWithDebInfo
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo -Dproject-name_BUILD_EXTERNAL_TESTS=ON ../../../..
 echo "COMPILING RELWITHDEBINFO CONFIG..."
 make -j$(($(nproc)+1))
-cd ../..
+cd ../../../..
 
 # reference: https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
 # reference: https://unix.stackexchange.com/questions/53036/read-a-single-key-gives-an-error

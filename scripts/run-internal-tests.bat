@@ -25,31 +25,31 @@ for %%a in (%*) do (
 :: RUN x86...
 echo RUNNING x86 INTERNAL TESTS...
 echo RUNNING DEBUG INTERNAL TESTS...
-x86\Debug\project-name.exe --dt-exit=true --dt-no-run=false || goto error
+build\vs2017\x86\Debug\project-name.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING MINSIZEREL INTERNAL TESTS...
-x86\MinSizeRel\project-name.exe --dt-exit=true --dt-no-run=false || goto error
+build\vs2017\x86\MinSizeRel\project-name.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING RELEASE INTERNAL TESTS...
-x86\Release\project-name.exe --dt-exit=true --dt-no-run=false || goto error
+build\vs2017\x86\Release\project-name.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING RELWITHDEBINFO INTERNAL TESTS...
-x86\RelWithDebInfo\project-name.exe --dt-exit=true --dt-no-run=false || goto error
+build\vs2017\x86\RelWithDebInfo\project-name.exe --dt-exit=true --dt-no-run=false || goto error
 :: END of running for x86
 
 :: RUN x64...
 echo RUNNING x64 INTERNAL TESTS...
 echo RUNNING DEBUG INTERNAL TESTS...
-x64\Debug\project-name.exe --dt-exit=true --dt-no-run=false || goto error
+build\vs2017\x64\Debug\project-name.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING MINSIZEREL INTERNAL TESTS...
-x64\MinSizeRel\project-name.exe --dt-exit=true --dt-no-run=false || goto error
+build\vs2017\x64\MinSizeRel\project-name.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING RELEASE INTERNAL TESTS...
-x64\Release\project-name.exe --dt-exit=true --dt-no-run=false || goto error
+build\vs2017\x64\Release\project-name.exe --dt-exit=true --dt-no-run=false || goto error
 
 echo RUNNING RELWITHDEBINFO INTERNAL TESTS...
-x64\RelWithDebInfo\project-name.exe --dt-exit=true --dt-no-run=false || goto error
+build\vs2017\x64\RelWithDebInfo\project-name.exe --dt-exit=true --dt-no-run=false || goto error
 :: END of running for x64
 
 :success

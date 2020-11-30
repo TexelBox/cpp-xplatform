@@ -44,7 +44,7 @@ for %%a in (%*) do (
 :: BUILD x86...
 echo BUILDING ALL CONFIGS FOR x86...
 :: reference: https://stackoverflow.com/questions/4165387/create-folder-with-batch-but-only-if-it-doesnt-already-exist
-if not exist "x86\" (mkdir x86 || goto error)
+if not exist "build\vs2017\x86\" (mkdir build\vs2017\x86 || goto error)
 
 :: build all the VS2017 stuff (project files, the .sln, etc.)
 :: -H<source of CMakeLists.txt>
@@ -52,32 +52,32 @@ if not exist "x86\" (mkdir x86 || goto error)
 :: -G "<generator>"
 :: -D<variable to set in cmake cache>
 :: I set the project-name_BUILD_EXTERNAL_TESTS=ON so that all targets in tests/ are built
-cmake -H. -Bx86 -G "Visual Studio 15 2017" -Dproject-name_BUILD_EXTERNAL_TESTS=ON || goto error
+cmake -H. -Bbuild\vs2017\x86 -G "Visual Studio 15 2017" -Dproject-name_BUILD_EXTERNAL_TESTS=ON || goto error
 
-:: actually run MSBuild in the x86 build directory to generate all 4 configurations (4 executables)
+:: actually run MSBuild in the build directory to generate all 4 configurations (4 executables)
 echo COMPILING DEBUG CONFIG...
-cmake --build x86 --config Debug || goto error
+cmake --build build\vs2017\x86 --config Debug || goto error
 echo COMPILING MINSIZEREL CONFIG...
-cmake --build x86 --config MinSizeRel || goto error
+cmake --build build\vs2017\x86 --config MinSizeRel || goto error
 echo COMPILING RELEASE CONFIG...
-cmake --build x86 --config Release || goto error
+cmake --build build\vs2017\x86 --config Release || goto error
 echo COMPILING RELWITHDEBINFO CONFIG...
-cmake --build x86 --config RelWithDebInfo || goto error
+cmake --build build\vs2017\x86 --config RelWithDebInfo || goto error
 
 :: END of building for x86
 
 :: BUILD x64...
 echo BUILDING ALL CONFIGS FOR x64...
-if not exist "x64\" (mkdir x64 || goto error)
-cmake -H. -Bx64 -G "Visual Studio 15 2017 Win64" -Dproject-name_BUILD_EXTERNAL_TESTS=ON || goto error
+if not exist "build\vs2017\x64\" (mkdir build\vs2017\x64 || goto error)
+cmake -H. -Bbuild\vs2017\x64 -G "Visual Studio 15 2017 Win64" -Dproject-name_BUILD_EXTERNAL_TESTS=ON || goto error
 echo COMPILING DEBUG CONFIG...
-cmake --build x64 --config Debug || goto error
+cmake --build build\vs2017\x64 --config Debug || goto error
 echo COMPILING MINSIZEREL CONFIG...
-cmake --build x64 --config MinSizeRel || goto error
+cmake --build build\vs2017\x64 --config MinSizeRel || goto error
 echo COMPILING RELEASE CONFIG...
-cmake --build x64 --config Release || goto error
+cmake --build build\vs2017\x64 --config Release || goto error
 echo COMPILING RELWITHDEBINFO CONFIG...
-cmake --build x64 --config RelWithDebInfo || goto error
+cmake --build build\vs2017\x64 --config RelWithDebInfo || goto error
 :: END of building for x64
 
 :success

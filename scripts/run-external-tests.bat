@@ -25,31 +25,31 @@ for %%a in (%*) do (
 :: RUN x86...
 echo RUNNING x86 EXTERNAL TESTS...
 echo RUNNING DEBUG EXTERNAL TESTS...
-x86\tests\Debug\project-name-external-tests.exe || goto error
+build\vs2017\x86\tests\Debug\project-name-external-tests.exe || goto error
 
 echo RUNNING MINSIZEREL EXTERNAL TESTS...
-x86\tests\MinSizeRel\project-name-external-tests.exe || goto error
+build\vs2017\x86\tests\MinSizeRel\project-name-external-tests.exe || goto error
 
 echo RUNNING RELEASE EXTERNAL TESTS...
-x86\tests\Release\project-name-external-tests.exe || goto error
+build\vs2017\x86\tests\Release\project-name-external-tests.exe || goto error
 
 echo RUNNING RELWITHDEBINFO EXTERNAL TESTS...
-x86\tests\RelWithDebInfo\project-name-external-tests.exe || goto error
+build\vs2017\x86\tests\RelWithDebInfo\project-name-external-tests.exe || goto error
 :: END of running for x86
 
 :: RUN x64...
 echo RUNNING x64 EXTERNAL TESTS...
 echo RUNNING DEBUG EXTERNAL TESTS...
-x64\tests\Debug\project-name-external-tests.exe || goto error
+build\vs2017\x64\tests\Debug\project-name-external-tests.exe || goto error
 
 echo RUNNING MINSIZEREL EXTERNAL TESTS...
-x64\tests\MinSizeRel\project-name-external-tests.exe || goto error
+build\vs2017\x64\tests\MinSizeRel\project-name-external-tests.exe || goto error
 
 echo RUNNING RELEASE EXTERNAL TESTS...
-x64\tests\Release\project-name-external-tests.exe || goto error
+build\vs2017\x64\tests\Release\project-name-external-tests.exe || goto error
 
 echo RUNNING RELWITHDEBINFO EXTERNAL TESTS...
-x64\tests\RelWithDebInfo\project-name-external-tests.exe || goto error
+build\vs2017\x64\tests\RelWithDebInfo\project-name-external-tests.exe || goto error
 :: END of running for x64
 
 :success
