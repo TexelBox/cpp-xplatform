@@ -1,7 +1,5 @@
 # building...
 [Bb]uild/
-x86/
-x64/
 
 # CMake...
 CMakeLists.txt.user
