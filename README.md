@@ -222,13 +222,13 @@ chmod +x scripts/dev-build-all.sh
 ### Running
 #### For Users...
 ##### Windows
-- For best performance, double-click/run `project-name.exe` in either x86/Release (32-bit) or x64/Release (64-bit).
+- For best performance, double-click/run `project-name.exe` in either build/vs2017/x86/Release/ (32-bit) or build/vs2017/x64/Release/ (64-bit).
 ##### Linux/macOS
-- For best performance, double-click/run `project-name` in build/Release.
+- For best performance, double-click/run `project-name` in build/unix-makefiles/default/Release/.
 
 #### For Developers...
 ##### Windows
-- If using `VS 2017`, open either x86/project-name.sln or x64/project-name.sln and click the green arrow (you can also change the build config with the drop-down - use Debug when you need the debugger and Release when testing for performance).
+- If using `VS 2017`, open either build/vs2017/x86/project-name.sln or build/vs2017/x64/project-name.sln and click the green arrow (you can also change the build config with the drop-down - use Debug when you need the debugger and Release when testing for performance).
 ##### Linux/macOS
 ```
 make -j$(($(nproc)+1))
