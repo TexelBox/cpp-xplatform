@@ -1,5 +1,5 @@
 # building...
-[Bb]uild/
+/[Bb]uild/
 
 # CMake...
 CMakeLists.txt.user
