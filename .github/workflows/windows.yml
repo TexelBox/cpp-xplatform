@@ -53,9 +53,9 @@ jobs:
         submodules: recursive
 
     - name: Build
-      run: ./scripts/dev-build-all.bat --no-pause
+      run: ./scripts/dev/build/vs2017/dev-build-all.bat --no-pause
 
     - name: Test
       run: |
-        ./scripts/run-internal-tests.bat --no-pause
-        ./scripts/run-external-tests.bat --no-pause
+        ./scripts/dev/test/vs2017/run-internal-tests.bat --no-pause
+        ./scripts/dev/test/vs2017/run-external-tests.bat --no-pause

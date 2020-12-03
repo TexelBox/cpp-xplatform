@@ -63,9 +63,9 @@ jobs:
         submodules: recursive
 
     - name: Build
-      run: ./scripts/dev-build-all.sh --no-pause
+      run: ./scripts/dev/build/unix-makefiles/dev-build-all.sh --no-pause
 
     - name: Test
       run: |
-        ./scripts/run-internal-tests.sh --no-pause
-        ./scripts/run-external-tests.sh --no-pause
+        ./scripts/dev/test/unix-makefiles/run-internal-tests.sh --no-pause
+        ./scripts/dev/test/unix-makefiles/run-external-tests.sh --no-pause

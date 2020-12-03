@@ -18,7 +18,7 @@ set -eu
 # note: there are flaws such as not handling symlinks or newline characters at end of directory names (very rare)
 path_to_script_dir="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 echo "PATH TO SCRIPT DIRECTORY = $path_to_script_dir"
-path_to_project_root_dir="$path_to_script_dir/.."
+path_to_project_root_dir="$path_to_script_dir/../../../.."
 echo "PATH TO PROJECT ROOT DIRECTORY = $path_to_project_root_dir"
 # execute rest of script from project root directory...
 cd "$path_to_project_root_dir"

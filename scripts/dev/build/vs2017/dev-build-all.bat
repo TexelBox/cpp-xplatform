@@ -18,7 +18,7 @@ title DEV-BUILD-ALL
 :: get the path to the directory containing this script
 set "path_to_script_dir=%~dp0"
 echo PATH TO SCRIPT DIRECTORY = %path_to_script_dir%
-set "path_to_project_root_dir=%path_to_script_dir%.."
+set "path_to_project_root_dir=%path_to_script_dir%..\..\..\.."
 echo PATH TO PROJECT ROOT DIRECTORY = %path_to_project_root_dir%
 :: execute rest of script from project root directory...
 :: note: /D allows changing the current drive (if needed)

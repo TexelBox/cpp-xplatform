@@ -16,7 +16,7 @@ set -eu
 # note: there are flaws such as not handling symlinks or newline characters at end of directory names (very rare)
 path_to_script_dir="$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )"
 echo "PATH TO SCRIPT DIRECTORY = $path_to_script_dir"
-path_to_project_root_dir="$path_to_script_dir/.."
+path_to_project_root_dir="$path_to_script_dir/../../../.."
 echo "PATH TO PROJECT ROOT DIRECTORY = $path_to_project_root_dir"
 # execute rest of script from project root directory...
 cd "$path_to_project_root_dir"
@@ -30,17 +30,17 @@ do
     fi
 done
 
-echo "RUNNING DEBUG INTERNAL TESTS..."
-./build/unix-makefiles/default/Debug/project-name --dt-exit=true --dt-no-run=false
+echo "RUNNING DEBUG EXTERNAL TESTS..."
+./build/unix-makefiles/default/Debug/tests/project-name-external-tests
 
-echo "RUNNING MINSIZEREL INTERNAL TESTS..."
-./build/unix-makefiles/default/MinSizeRel/project-name --dt-exit=true --dt-no-run=false
+echo "RUNNING MINSIZEREL EXTERNAL TESTS..."
+./build/unix-makefiles/default/MinSizeRel/tests/project-name-external-tests
 
-echo "RUNNING RELEASE INTERNAL TESTS..."
-./build/unix-makefiles/default/Release/project-name --dt-exit=true --dt-no-run=false
+echo "RUNNING RELEASE EXTERNAL TESTS..."
+./build/unix-makefiles/default/Release/tests/project-name-external-tests
 
-echo "RUNNING RELWITHDEBINFO INTERNAL TESTS..."
-./build/unix-makefiles/default/RelWithDebInfo/project-name --dt-exit=true --dt-no-run=false
+echo "RUNNING RELWITHDEBINFO EXTERNAL TESTS..."
+./build/unix-makefiles/default/RelWithDebInfo/tests/project-name-external-tests
 
 # reference: https://stackoverflow.com/questions/92802/what-is-the-linux-equivalent-to-dos-pause
 # reference: https://unix.stackexchange.com/questions/53036/read-a-single-key-gives-an-error
