@@ -64,7 +64,7 @@ The design allows for clear and easy building for both developers and users. It 
 - [x] Cross-platform (`Windows`, `Linux`, `macOS`)
 - [x] Support for generating multiple build systems (`CMake`)
 - [x] Simple "up-to-date" dependency tracking/handling (`Git Submodules` / recursive cloning)
-- [x] Simple building / test-running ("One-click" `Batch/Shell` scripts)
+- [x] Simple building / test-running ("One-click" `Shell` scripts)
 - [x] Pre-written scripts for generating `Visual Studio 2017 solutions` (Windows - x86/x64) and `Unix Makefiles` (Linux/macOS) that can used as a quick way to compile all configurations (Debug, MinSizeRel, Release, RelWithDebInfo) or perform a CMake rebuild
 - [x] Semi-standard project file/directory structure/layout
 - [x] Consistent line-ending normalization/handling (`Git Attributes`)
@@ -196,11 +196,20 @@ git submodule update --init --recursive
 #### For Developers...
 **NOTE: the enforced generators by the scripts are "Visual Studio 2017"/"Visual Studio 2017 Win64" and "Unix Makefiles" for their respective platforms. I won't be testing this repository with any other generator (use `cmake --help` for a list), but anybody can try using cmake manually to see if another generator works.**
 #### Windows
-- Double-click or use your favourite terminal to run
+- Use Git Bash to run
 ```
-scripts\dev\build\vs2017\dev-build-all.bat
+./scripts/dev/build/vs2017/dev-build-all.sh
 ```
-**NOTE: you may have to run `./scripts/dev/build/vs2017/dev-build-all.bat` or `.\scripts\dev\build\vs2017\dev-build-all.bat` instead (depending on your shell).**
+**NOTE: executing this way defaults to using `bash`.**
+- If for some reason the script is non-executable, then run the script through an interpreter (only `bash` and `dash` are tested, but you can try others)...
+```
+bash scripts/dev/build/vs2017/dev-build-all.sh
+```
+- or, add executable permission and then run...
+```
+chmod +x scripts/dev/build/vs2017/dev-build-all.sh
+./scripts/dev/build/vs2017/dev-build-all.sh
+```
 #### Linux/macOS
 - Use your favourite terminal to run
 ```
@@ -245,14 +254,14 @@ make -j$(($(nproc)+1))
   - Single config:
     - `./project-name --dt-exit=true --dt-no-run=false`
   - All configs:
-    - `./scripts/dev/test/vs2017/run-internal-tests.bat` (Windows)
+    - `./scripts/dev/test/vs2017/run-internal-tests.sh` (Windows)
     - `./scripts/dev/test/unix-makefiles/run-internal-tests.sh` (Linux/macOS)
 - External Tests:
   - Single config:
     - `./project-name-external-tests`
     - or, set the `StartUp Project` to `project-name-external-tests` and run directly in the IDE as usual (Visual Studio only)
   - All configs:
-    - `./scripts/dev/test/vs2017/run-external-tests.bat` (Windows)
+    - `./scripts/dev/test/vs2017/run-external-tests.sh` (Windows)
     - `./scripts/dev/test/unix-makefiles/run-external-tests.sh` (Linux/macOS)
 
 ---
